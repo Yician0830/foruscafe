@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>入場方式 — For Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner container">
+    <a href="index.html" class="nav-logo script">For Us</a>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">首頁</a>
+      <a href="info.html">活動資訊</a>
+      <a href="entry.html" class="active">入場方式</a>
+      <a href="gifts.html">應援好禮</a>
+      <a href="stamps.html">集章活動</a>
+      <a href="notice.html">現場須知</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="snowfield" id="snowfield"></div>
+  <div class="eyebrow">How to Enter</div>
+  <h1 class="script">入場方式</h1>
+  <p class="lede">預約制優先，也保留現場排隊名額</p>
+</section>
+
+<section style="padding-top:20px;">
+  <div class="container">
+    <div class="entry-grid">
+      <div class="card">
+        <b style="font-size:15px; letter-spacing:1px;">預約時段</b>
+        <div class="slot-grid">
+          <div class="slot" data-key="slot-1000" data-normal="開放中"><span class="slot-time">10:00–10:50</span><span class="slot-label"></span></div>
+          <div class="slot" data-key="slot-1100" data-normal="開放中"><span class="slot-time">11:00–11:50</span><span class="slot-label"></span></div>
+          <div class="slot" data-key="slot-1200" data-normal="開放中"><span class="slot-time">12:00–12:50</span><span class="slot-label"></span></div>
+          <div class="slot" data-key="slot-1300" data-normal="開放中"><span class="slot-time">13:00–13:50</span><span class="slot-label"></span></div>
+          <div class="slot" data-key="slot-1400" data-normal="開放中"><span class="slot-time">14:00–14:50</span><span class="slot-label"></span></div>
+          <div class="slot" data-key="slot-1500" data-normal="開放中"><span class="slot-time">15:00–15:50</span><span class="slot-label"></span></div>
+        </div>
+        <div class="slot-legend">
+          <span><i class="dot dot-open"></i>開放預約中</span>
+          <span><i class="dot dot-closed"></i>尚未開放</span>
+          <span><i class="dot dot-full"></i>已額滿</span>
+        </div>
+        <p class="status-updated" id="statusUpdated" style="text-align:left; margin:14px 0 0;">狀態資料讀取中…</p>
+        <div class="badge-gift">
+          <span>★</span>
+          <span>前 100 名預約者，可獲得限定「主題票卡」一組。</span>
+        </div>
+        <ul class="rules-mini">
+          <li>・ 每筆預約限本人 1 位，同行者請個別預約</li>
+          <li>・ 入場前 10 分鐘開始整隊，預約保留 10 分鐘，請盡量準時</li>
+          <li>・ 如無法前來，請提前取消，把名額留給其他 ARMY</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <b style="font-size:15px; letter-spacing:1px;">現場排隊</b>
+        <div class="walkin-stat">
+          <div class="num">10:10</div>
+          <div class="txt"><b>每日開放入場</b><span>現場排隊自此時間開始</span></div>
+        </div>
+        <div class="walkin-stat">
+          <div class="num">20</div>
+          <div class="txt"><b>每時段開放名額</b><span>視現場狀況調整，僅限外帶</span></div>
+        </div>
+        <div class="walkin-stat">
+          <div class="num">16:00</div>
+          <div class="txt"><b>全面開放入場</b><span>免預約、免號碼牌，完成低消即可上樓參觀</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="script">For Us</span>
+    <div class="handle">@thv</div>
+    <button class="share-btn" onclick="shareSite()">分享這個頁面</button>
+    <a class="back" href="index.html">← 回首頁</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="status.js"></script>
+</body>
+</html>

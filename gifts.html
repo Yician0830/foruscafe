@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>應援好禮 — For Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner container">
+    <a href="index.html" class="nav-logo script">For Us</a>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">首頁</a>
+      <a href="info.html">活動資訊</a>
+      <a href="entry.html">入場方式</a>
+      <a href="gifts.html" class="active">應援好禮</a>
+      <a href="stamps.html">集章活動</a>
+      <a href="notice.html">現場須知</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="snowfield" id="snowfield"></div>
+  <div class="eyebrow">Gift for Army</div>
+  <h1 class="script">應援好禮</h1>
+  <p class="lede">完成低消消費，即可兌換入場禮</p>
+</section>
+
+<section style="padding-top:20px;">
+  <div class="container">
+    <div class="gift-grid">
+      <div class="gift-card" data-key="poster" data-normal="供應中">
+        <svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="2"/><line x1="14" y1="14" x2="34" y2="14"/><line x1="14" y1="22" x2="34" y2="22"/><line x1="14" y1="30" x2="26" y2="30"/></svg>
+        <h4>A5 海報</h4>
+        <p>主視覺紀念海報</p>
+      </div>
+      <div class="gift-card" data-key="ribbon" data-normal="供應中">
+        <svg viewBox="0 0 48 48"><path d="M10 12 Q24 4 38 12" /><circle cx="24" cy="26" r="10"/><line x1="24" y1="16" x2="24" y2="4"/></svg>
+        <h4>絲帶手環</h4>
+        <p>可調式應援手環</p>
+      </div>
+      <div class="gift-card" data-key="ticket" data-normal="供應中">
+        <svg viewBox="0 0 48 48"><rect x="6" y="14" width="36" height="20" rx="2"/><line x1="24" y1="14" x2="24" y2="34" stroke-dasharray="2 3"/></svg>
+        <h4>主題票卡</h4>
+        <p>雙面設計紀念票卡</p>
+      </div>
+      <div class="gift-card" data-key="bag" data-normal="供應中">
+        <svg viewBox="0 0 48 48"><path d="M12 18 L14 44 L34 44 L36 18 Z"/><path d="M18 18 C18 10 30 10 30 18"/></svg>
+        <h4>手提紙袋</h4>
+        <p>主視覺提袋</p>
+      </div>
+      <div class="gift-card" data-key="tearfilm" data-normal="供應中">
+        <svg viewBox="0 0 48 48"><rect x="8" y="6" width="12" height="36" rx="1"/><rect x="22" y="10" width="12" height="30" rx="1"/><rect x="34" y="14" width="8" height="24" rx="1"/></svg>
+        <h4>撕拉片</h4>
+        <p>共三款，隨機發放</p>
+      </div>
+    </div>
+    <p class="status-updated" id="statusUpdated">狀態資料讀取中…</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="script">For Us</span>
+    <div class="handle">@thv</div>
+    <button class="share-btn" onclick="shareSite()">分享這個頁面</button>
+    <a class="back" href="index.html">← 回首頁</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="status.js"></script>
+</body>
+</html>

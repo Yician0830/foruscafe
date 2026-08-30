@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Us — 金泰亨 演唱會應援咖啡廳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner container">
+    <a href="index.html" class="nav-logo script">For Us</a>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html" class="active">首頁</a>
+      <a href="info.html">活動資訊</a>
+      <a href="entry.html">入場方式</a>
+      <a href="gifts.html">應援好禮</a>
+      <a href="stamps.html">集章活動</a>
+      <a href="notice.html">現場須知</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <svg class="branch tl" viewBox="0 0 300 300"><path d="M0 40 C60 30 90 60 140 20 M40 10 C60 50 40 90 90 100 M10 80 C50 70 70 110 120 130"/></svg>
+  <svg class="branch br" viewBox="0 0 300 300"><path d="M300 260 C240 270 210 240 160 280 M260 290 C240 250 260 210 210 200 M290 220 C250 230 230 190 180 170"/></svg>
+  <div class="snowfield" id="snowfield"></div>
+
+  <div class="eyebrow">BTS 演唱會應援咖啡廳</div>
+  <h1 class="script">For&nbsp;Us</h1>
+  <div class="subtitle">Tae Hyung Cafe Support</div>
+
+  <div class="idcard">
+    <span>金泰亨 KIM TAE HYUNG</span>
+    <span class="dot"></span>
+    <span>1995.12.30</span>
+  </div>
+
+  <div class="quote-line">「我仍然在等你」</div>
+
+  <div class="countdown" id="countdown">
+    <div class="box"><div class="num" id="cd-d">--</div><div class="lbl">Days</div></div>
+    <div class="box"><div class="num" id="cd-h">--</div><div class="lbl">Hours</div></div>
+    <div class="box"><div class="num" id="cd-m">--</div><div class="lbl">Min</div></div>
+    <div class="box"><div class="num" id="cd-s">--</div><div class="lbl">Sec</div></div>
+  </div>
+
+  <div class="datebadge">2026.11.19 — 11.22 ・ MISS MIMI COFFEE</div>
+  <div class="scrolldown">SCROLL ↓</div>
+</section>
+
+<div class="divider"><span>✦</span><span>✦</span><span>✦</span></div>
+
+<section id="quick">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Explore</div>
+      <h2>快速導覽</h2>
+      <p class="desc">點選下方卡片，查看各項活動詳情</p>
+    </div>
+
+    <div class="quick-grid">
+      <a class="quick-card" href="info.html">
+        <div class="qic">◆</div>
+        <h3>活動資訊</h3>
+        <p>MISS MIMI COFFEE 地址、營業時間與地圖</p>
+        <span class="go">查看詳情 →</span>
+      </a>
+      <a class="quick-card" href="entry.html">
+        <div class="qic">◇</div>
+        <h3>入場方式</h3>
+        <p>預約時段一覽，以及現場排隊規則</p>
+        <span class="go">查看詳情 →</span>
+      </a>
+      <a class="quick-card" href="gifts.html">
+        <div class="qic">✦</div>
+        <h3>應援好禮</h3>
+        <p>海報、手環、票卡等五款限定小物</p>
+        <span class="go">查看詳情 →</span>
+      </a>
+      <a class="quick-card" href="stamps.html">
+        <div class="qic">●</div>
+        <h3>集章活動</h3>
+        <p>集滿四枚印章，兌換限定 PP 夾</p>
+        <span class="go">查看詳情 →</span>
+      </a>
+      <a class="quick-card" href="notice.html">
+        <div class="qic">▲</div>
+        <h3>現場須知</h3>
+        <p>入場前必看的 9 件事</p>
+        <span class="go">查看詳情 →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="script">For Us</span>
+    <div class="handle">@thv</div>
+    <button class="share-btn" onclick="shareSite()">分享這個頁面</button>
+    <div class="fine">數量有限，送完為止・活動內容以現場公告為準</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

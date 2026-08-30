@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>集章活動 — For Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner container">
+    <a href="index.html" class="nav-logo script">For Us</a>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">首頁</a>
+      <a href="info.html">活動資訊</a>
+      <a href="entry.html">入場方式</a>
+      <a href="gifts.html">應援好禮</a>
+      <a href="stamps.html" class="active">集章活動</a>
+      <a href="notice.html">現場須知</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="snowfield" id="snowfield"></div>
+  <div class="eyebrow">Stamp Rally</div>
+  <h1 class="script">集章活動</h1>
+  <p class="lede">現場共有四個關卡，點下方印章看看流程</p>
+</section>
+
+<section style="padding-top:20px;">
+  <div class="container">
+    <div class="stamp-wrap">
+      <div class="stamp-copy">
+        <p>
+          完成集章卡上的任務，並請工作人員蓋上印章。<br>
+          集滿四枚印章後，即可向工作人員兌換限定小禮物。
+        </p>
+        <div class="prize">🎁 集滿 4 枚兌換「PP夾」（兩款隨機發放，數量有限送完為止）</div>
+      </div>
+      <div class="stamp-circles" id="stampCircles">
+        <div class="stamp" data-letter="A"><span class="letter">A</span><span class="task">關卡一</span></div>
+        <div class="stamp" data-letter="B"><span class="letter">B</span><span class="task">關卡二</span></div>
+        <div class="stamp" data-letter="C"><span class="letter">C</span><span class="task">關卡三</span></div>
+        <div class="stamp" data-letter="D"><span class="letter">D</span><span class="task">關卡四</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="script">For Us</span>
+    <div class="handle">@thv</div>
+    <button class="share-btn" onclick="shareSite()">分享這個頁面</button>
+    <a class="back" href="index.html">← 回首頁</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

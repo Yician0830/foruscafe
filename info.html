@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>活動資訊 — For Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner container">
+    <a href="index.html" class="nav-logo script">For Us</a>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">首頁</a>
+      <a href="info.html" class="active">活動資訊</a>
+      <a href="entry.html">入場方式</a>
+      <a href="gifts.html">應援好禮</a>
+      <a href="stamps.html">集章活動</a>
+      <a href="notice.html">現場須知</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="snowfield" id="snowfield"></div>
+  <div class="eyebrow">Location &amp; Date</div>
+  <h1 class="script">活動資訊</h1>
+  <p class="lede">來之前，先看清楚地點與營業時間</p>
+</section>
+
+<section style="padding-top:20px;">
+  <div class="container">
+    <div class="info-grid">
+      <div class="card">
+        <ul class="info-list">
+          <li>
+            <span class="ic">◆</span>
+            <div>
+              <b>Location</b>
+              MISS MIMI COFFEE<br>
+              高雄市左營區新下里新勝街21號<br>
+              捷運巨蛋站 1號／5號出口，步行約 5 分鐘
+            </div>
+          </li>
+          <li>
+            <span class="ic">◆</span>
+            <div>
+              <b>Date &amp; Hours</b>
+              <table class="hours-table">
+                <tr><td>11/19（四）－11/20（五）</td><td>10:00–20:00</td></tr>
+                <tr><td>11/21（六）－11/22（日）</td><td>10:00–18:00</td></tr>
+              </table>
+            </div>
+          </li>
+        </ul>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E9%AB%98%E9%9B%84%E5%B8%82%E5%B7%A6%E7%87%9F%E5%8D%80%E6%96%B0%E4%B8%8B%E9%87%8C%E6%96%B0%E5%8B%9D%E8%A1%9721%E8%99%9F" target="_blank" rel="noopener">在 Google 地圖開啟 →</a>
+      </div>
+
+      <div class="map-frame">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=%E9%AB%98%E9%9B%84%E5%B8%82%E5%B7%A6%E7%87%9F%E5%8D%80%E6%96%B0%E4%B8%8B%E9%87%8C%E6%96%B0%E5%8B%9D%E8%A1%9721%E8%99%9F&output=embed">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="script">For Us</span>
+    <div class="handle">@thv</div>
+    <button class="share-btn" onclick="shareSite()">分享這個頁面</button>
+    <a class="back" href="index.html">← 回首頁</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
