@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>應援菜單 — For Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* 菜單頁專屬樣式，不會影響其他頁面 */
+  .menu-category{ margin-bottom:44px; }
+  .menu-category h3{
+    font-family:'Cormorant Garamond', serif; font-weight:500; font-size:22px;
+    color:var(--navy-deep); margin:0 0 18px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .menu-item{
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    padding:14px 0; border-bottom:1px dashed var(--line);
+  }
+  .menu-item:last-child{ border-bottom:none; }
+  .menu-item .mi-left{ flex:1; }
+  .menu-item .mi-name{ font-size:14.5px; font-weight:500; color:var(--navy-deep); }
+  .menu-item .mi-desc{ font-size:12px; color:var(--blue-mid); margin-top:4px; line-height:1.6; }
+  .menu-item .mi-price{
+    font-size:14px; color:var(--navy); white-space:nowrap;
+    font-family:'Cormorant Garamond', serif; font-weight:600;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner container">
+    <a href="index.html" class="nav-logo script">For Us</a>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">首頁</a>
+      <a href="info.html">活動資訊</a>
+      <a href="entry.html">入場方式</a>
+      <a href="gifts.html">應援好禮</a>
+      <a href="lottery.html">一番賞</a>
+      <a href="merch.html">周邊販售</a>
+      <a href="stamps.html">集章活動</a>
+      <a href="decor.html">活動布置</a>
+      <a href="menu.html" class="active">應援菜單</a>
+      <a href="notice.html">現場須知</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="snowfield" id="snowfield"></div>
+  <div class="eyebrow">Menu</div>
+  <h1>應援菜單</h1>
+  <p class="lede">現場消費即可完成低消，兌換入場禮</p>
+</section>
+
+<section style="padding-top:20px;">
+  <div class="container">
+
+    <!-- ===== 飲品：複製 .menu-item 貼上即可增加品項 ===== -->
+    <div class="menu-category">
+      <h3>飲品 Drinks</h3>
+
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-name">品項名稱</div>
+          <div class="mi-desc">這裡放品項說明，例如口味、材料</div>
+        </div>
+        <div class="mi-price">NT$150</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-name">品項名稱</div>
+          <div class="mi-desc">這裡放品項說明</div>
+        </div>
+        <div class="mi-price">NT$150</div>
+      </div>
+    </div>
+
+    <!-- ===== 輕食：複製 .menu-item 貼上即可增加品項 ===== -->
+    <div class="menu-category">
+      <h3>輕食 Food</h3>
+
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-name">品項名稱</div>
+          <div class="mi-desc">這裡放品項說明</div>
+        </div>
+        <div class="mi-price">NT$220</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-name">品項名稱</div>
+          <div class="mi-desc">這裡放品項說明</div>
+        </div>
+        <div class="mi-price">NT$220</div>
+      </div>
+    </div>
+
+    <!-- ===== 甜點：複製 .menu-item 貼上即可增加品項 ===== -->
+    <div class="menu-category">
+      <h3>甜點 Dessert</h3>
+
+      <div class="menu-item">
+        <div class="mi-left">
+          <div class="mi-name">品項名稱</div>
+          <div class="mi-desc">這裡放品項說明</div>
+        </div>
+        <div class="mi-price">NT$180</div>
+      </div>
+    </div>
+
+    <div class="badge-gift">
+      <span>★</span>
+      <span>這裡可以放低消規則、加購說明或其他提醒文字。</span>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="script">For Us</span>
+    <div class="handle">@thv</div>
+    <button class="share-btn" onclick="shareSite()">分享這個頁面</button>
+    <a class="back" href="index.html">← 回首頁</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
