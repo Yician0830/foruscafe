@@ -362,3 +362,4 @@ footer .back{ display:block; margin-top:18px; font-size:12px; color:var(--navy);
 }
 .nav-logo img{ height:32px; display:block; }
 .footer-logo{ height:56px; display:block; margin:0 auto 14px; }
+.hero-logo{ max-width:520px; width:80%; height:auto; margin:0 auto; display:block; }
