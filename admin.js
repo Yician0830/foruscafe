@@ -14,7 +14,7 @@ const ITEMS = [
   { key: 'lottery-a', label: 'BT21XSNOWPEAK TATA吊飾',           type: 'stock' },
   { key: 'lottery-b', label: '10吋無框畫',           type: 'stock' },
    { key: 'lottery-c', label: 'Q版愛心迷你扇(兩款隨機)',           type: 'stock' },
-   { key: 'lottery-d', label: '10吋無框畫',           type: 'stock' },
+   { key: 'lottery-d', label: '迷你手幅吊飾',           type: 'stock' },
    { key: 'lottery-e', label: '10吋無框畫',           type: 'stock' },
    { key: 'lottery-f', label: '10吋無框畫',           type: 'stock' },
    { key: 'lottery-g', label: '10吋無框畫',           type: 'stock' },
