@@ -27,7 +27,7 @@ const ITEMS = [
 ];
 const PRESETS = {
   gift: ['未開放','供應中', '已發完'],
-  slot: ['開放中', '未開放', '已額滿'],
+  slot: [ '未開放','開放中', '已額滿'],
 };
 
 const auth = firebase.auth();
