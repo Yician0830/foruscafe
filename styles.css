@@ -123,6 +123,8 @@ img{max-width:100%;display:block;}
   position:relative; padding:90px 24px 60px; text-align:center; overflow:hidden;
 }
 .page-hero h1{
+  font-family:'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
+  font-weight:700;
   font-size:clamp(48px,9vw,80px); margin:6px 0 0; color:var(--navy-deep); z-index:2; position:relative;
 }
 .page-hero .eyebrow{ position:relative; z-index:2; }
