@@ -247,10 +247,10 @@ section{ padding:90px 0; position:relative; }
   text-align:left; padding:0; display:flex; flex-direction:column; overflow:hidden;
 }
 .product-photo{
-  width:100%; aspect-ratio:4/3; background:var(--card-tint); overflow:hidden;
+  width:100%;  background:var(--card-tint); overflow:hidden;
   display:flex; align-items:center; justify-content:center;
 }
-.product-photo img{ width:100%; height:100%; object-fit:contain; display:block; }
+.product-photo img{ width:100%; height:auto; display:block; }
 .product-photo svg{ width:36px; height:36px; margin:0; stroke:var(--accent); }
 .product-info{ padding:16px 18px 20px; }
 .product-info h4{ margin:0 0 6px; font-size:14.5px; font-weight:600; color:var(--navy-deep); }
