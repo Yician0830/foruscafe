@@ -242,7 +242,7 @@ section{ padding:90px 0; position:relative; }
 .walkin-stat .txt span{font-size:12.5px; color:var(--blue-mid);}
 
 /* ---------- PRODUCT GRID（一番賞／周邊販售：一列三個、可放商品照片） ---------- */
-.product-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; align-items:start; }
+.product-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
 .product-card{
   text-align:left; padding:0; display:flex; flex-direction:column; overflow:hidden;
 }
