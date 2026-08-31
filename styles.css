@@ -285,6 +285,17 @@ details summary::after{ content:'+'; font-size:20px; color:var(--blue-mid); tran
 details[open] summary::after{ transform:rotate(45deg); }
 details p{ font-size:13.5px; color:var(--navy); line-height:1.8; margin:12px 0 0; opacity:.85; }
 
+/* ---------- POSTCARD ---------- */
+.postcard-grid{ display:grid; grid-template-columns:1fr 1fr; gap:30px; }
+.postcard-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:16px; margin:0; text-align:center;
+}
+.postcard-card img{ width:100%; border-radius:12px; display:block; }
+.postcard-card figcaption{
+  margin-top:12px; font-size:12.5px; letter-spacing:1.5px; color:var(--blue-mid); text-transform:uppercase;
+}
+
 /* ---------- QUICK NAV CARDS (home page) ---------- */
 .quick-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
 .quick-card{
@@ -311,7 +322,7 @@ footer .back{ display:block; margin-top:18px; font-size:12px; color:var(--navy);
 
 /* ---------- responsive ---------- */
 @media (max-width:860px){
-  .info-grid, .entry-grid, .stamp-wrap{ grid-template-columns:1fr; }
+  .info-grid, .entry-grid, .stamp-wrap, .postcard-grid{ grid-template-columns:1fr; }
   .gift-grid, .quick-grid{ grid-template-columns:repeat(2,1fr); }
   .stamp-circles{ order:-1; }
   .countdown{ gap:12px; }
