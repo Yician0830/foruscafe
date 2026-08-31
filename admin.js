@@ -17,7 +17,7 @@ const ITEMS = [
    { key: 'lottery-d', label: '迷你手幅吊飾',           type: 'stock' },
    { key: 'lottery-e', label: 'Q版造型磁鐵(兩款隨機)',           type: 'stock' },
    { key: 'lottery-f', label: 'Q版造型吊飾(10款隨機)',           type: 'stock' },
-   { key: 'lottery-g', label: '10吋無框畫',           type: 'stock' },
+   { key: 'lottery-g', label: 'Q版漢堡大頭扇',           type: 'stock' },
    { key: 'lottery-h', label: '10吋無框畫',           type: 'stock' },
   { key: 'merch-1',   label: '商品名稱1',      type: 'stock' },
   { key: 'merch-2',   label: '商品名稱2',      type: 'stock' },
