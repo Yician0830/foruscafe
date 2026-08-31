@@ -15,7 +15,7 @@
 html{scroll-behavior:smooth;}
 body{
   margin:0;
-  font-family:'Noto Sans TC', sans-serif;
+  font-family:'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
   color:var(--navy-deep);
   background:linear-gradient(180deg,var(--bg-top),var(--bg-bot) 60%, #dfeaf3);
   -webkit-font-smoothing:antialiased;
