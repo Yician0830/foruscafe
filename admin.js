@@ -35,8 +35,6 @@ const slotGroup = document.getElementById('slotGroup');
 const lotteryGroup = document.getElementById('lotteryGroup');
 const merchGroup = document.getElementById('merchGroup');
 
-let currentValues = {};
-
 auth.onAuthStateChanged(function(user){
   if(user){
     loginCard.classList.add('hidden');
@@ -63,10 +61,24 @@ document.getElementById('logoutBtn').addEventListener('click', function(){
   auth.signOut();
 });
 
+// 單一項目儲存（寫入 Firestore + 更新 UI 狀態）
+function saveOne(item, value, savedFlag){
+  return db.collection('status').doc(item.key).set({
+    value: value,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }, { merge: true }).then(function(){
+    if(savedFlag){
+      savedFlag.classList.add('show');
+      setTimeout(function(){ savedFlag.classList.remove('show'); }, 1800);
+    }
+  });
+}
+
 function buildRow(item){
   const row = document.createElement('div');
   row.className = 'admin-row';
   row.dataset.key = item.key;
+  row.dataset.dirty = 'false';
 
   const name = document.createElement('div');
   name.className = 'name';
@@ -78,6 +90,10 @@ function buildRow(item){
   current.textContent = '目前：讀取中…';
   row.appendChild(current);
 
+  const savedFlag = document.createElement('span');
+  savedFlag.className = 'saved-flag';
+  savedFlag.textContent = '已儲存 ✓';
+
   if(item.type === 'stock'){
     const numInput = document.createElement('input');
     numInput.type = 'number';
@@ -85,28 +101,28 @@ function buildRow(item){
     numInput.placeholder = '剩餘數量';
     numInput.style.width = '90px';
     row.appendChild(numInput);
+    numInput.addEventListener('input', function(){ row.dataset.dirty = 'true'; });
 
     const saveBtn = document.createElement('button');
     saveBtn.className = 'save-btn';
     saveBtn.textContent = '更新';
     row.appendChild(saveBtn);
-
-    const savedFlag = document.createElement('span');
-    savedFlag.className = 'saved-flag';
-    savedFlag.textContent = '已儲存 ✓';
     row.appendChild(savedFlag);
 
+    row._getValue = function(){
+      const v = numInput.value.trim();
+      if(v === '' || isNaN(parseInt(v, 10))) return null;
+      return String(parseInt(v, 10));
+    };
+    row._afterSave = function(){ row.dataset.dirty = 'false'; };
+
     saveBtn.addEventListener('click', function(){
-      const value = numInput.value.trim();
-      if(value === '' || isNaN(parseInt(value, 10))) return;
+      const value = row._getValue();
+      if(value === null) return;
       saveBtn.disabled = true;
-      db.collection('status').doc(item.key).set({
-        value: String(parseInt(value, 10)),
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true }).then(function(){
+      saveOne(item, value, savedFlag).then(function(){
         saveBtn.disabled = false;
-        savedFlag.classList.add('show');
-        setTimeout(function(){ savedFlag.classList.remove('show'); }, 1800);
+        row._afterSave();
       }).catch(function(err){
         saveBtn.disabled = false;
         alert('儲存失敗：' + err.message);
@@ -136,29 +152,29 @@ function buildRow(item){
 
   select.addEventListener('change', function(){
     customInput.classList.toggle('hidden', select.value !== '__custom__');
+    row.dataset.dirty = 'true';
   });
+  customInput.addEventListener('input', function(){ row.dataset.dirty = 'true'; });
 
   const saveBtn = document.createElement('button');
   saveBtn.className = 'save-btn';
   saveBtn.textContent = '更新';
   row.appendChild(saveBtn);
-
-  const savedFlag = document.createElement('span');
-  savedFlag.className = 'saved-flag';
-  savedFlag.textContent = '已儲存 ✓';
   row.appendChild(savedFlag);
 
-  saveBtn.addEventListener('click', function(){
+  row._getValue = function(){
     const value = select.value === '__custom__' ? customInput.value.trim() : select.value;
-    if(!value) return;
+    return value || null;
+  };
+  row._afterSave = function(){ row.dataset.dirty = 'false'; };
+
+  saveBtn.addEventListener('click', function(){
+    const value = row._getValue();
+    if(value === null) return;
     saveBtn.disabled = true;
-    db.collection('status').doc(item.key).set({
-      value: value,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true }).then(function(){
+    saveOne(item, value, savedFlag).then(function(){
       saveBtn.disabled = false;
-      savedFlag.classList.add('show');
-      setTimeout(function(){ savedFlag.classList.remove('show'); }, 1800);
+      row._afterSave();
     }).catch(function(err){
       saveBtn.disabled = false;
       alert('儲存失敗：' + err.message);
@@ -182,6 +198,58 @@ function renderGroups(){
     merchGroup.appendChild(buildRow(item));
   });
 }
+
+// 批次更新：只送出該分類中「有變更（dirty）」的項目
+function bulkSave(containerEl, btnEl){
+  const rows = Array.prototype.slice.call(containerEl.querySelectorAll('.admin-row[data-dirty="true"]'));
+  if(rows.length === 0){
+    btnEl.textContent = '沒有變更項目';
+    setTimeout(function(){ btnEl.textContent = '全部更新'; }, 1500);
+    return;
+  }
+  btnEl.disabled = true;
+  btnEl.textContent = '更新中…';
+
+  const batch = db.batch();
+  const toMark = [];
+  rows.forEach(function(row){
+    const value = row._getValue ? row._getValue() : null;
+    if(value === null) return;
+    const key = row.dataset.key;
+    const ref = db.collection('status').doc(key);
+    batch.set(ref, {
+      value: value,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    toMark.push(row);
+  });
+
+  batch.commit().then(function(){
+    toMark.forEach(function(row){
+      if(row._afterSave) row._afterSave();
+      const flag = row.querySelector('.saved-flag');
+      if(flag){
+        flag.classList.add('show');
+        setTimeout(function(){ flag.classList.remove('show'); }, 1800);
+      }
+    });
+    btnEl.disabled = false;
+    btnEl.textContent = '已全部更新 ✓';
+    setTimeout(function(){ btnEl.textContent = '全部更新'; }, 1800);
+  }).catch(function(err){
+    btnEl.disabled = false;
+    btnEl.textContent = '全部更新';
+    alert('批次儲存失敗：' + err.message);
+  });
+}
+
+document.querySelectorAll('.bulk-save-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    const targetId = btn.getAttribute('data-target');
+    const containerEl = document.getElementById(targetId);
+    if(containerEl) bulkSave(containerEl, btn);
+  });
+});
 
 function startListening(){
   if(giftGroup.childElementCount === 0 && slotGroup.childElementCount === 0){
