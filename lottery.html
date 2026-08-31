@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>集章活動 — For Us</title>
+<title>一番賞 — For Us</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,9 +20,9 @@
       <a href="info.html">活動資訊</a>
       <a href="entry.html">入場方式</a>
       <a href="gifts.html">應援好禮</a>
-      <a href="lottery.html">一番賞</a>
+      <a href="lottery.html" class="active">一番賞</a>
       <a href="merch.html">周邊販售</a>
-      <a href="stamps.html" class="active">集章活動</a>
+      <a href="stamps.html">集章活動</a>
       <a href="decor.html">活動布置</a>
       <a href="notice.html">現場須知</a>
     </nav>
@@ -31,28 +31,47 @@
 
 <section class="page-hero">
   <div class="snowfield" id="snowfield"></div>
-  <div class="eyebrow">Stamp Rally</div>
-  <h1>集章活動</h1>
-  <p class="lede">現場共有四個關卡，點下方印章看看流程</p>
+  <div class="eyebrow">Ichiban Kuji</div>
+  <h1>一番賞</h1>
+  <p class="lede">在這裡說明一番賞的玩法、賞品分級與抽選方式</p>
 </section>
 
 <section style="padding-top:20px;">
   <div class="container">
-    <div class="stamp-wrap">
-      <div class="stamp-copy">
-        <p>
-          完成集章卡上的任務，並請工作人員蓋上印章。<br>
-          集滿四枚印章後，即可向工作人員兌換限定小禮物。
-        </p>
-        <div class="prize">🎁 集滿 4 枚兌換「PP夾」（兩款隨機發放，數量有限送完為止）</div>
+
+    <!-- ===== 玩法說明：改成你實際的規則 ===== -->
+    <div class="card" style="margin-bottom:30px;">
+      <b style="font-size:15px; letter-spacing:1px;">遊戲規則</b>
+      <ul class="info-list">
+        <li>
+          <span class="ic">◆</span>
+          <div>
+            <b>How to Play</b>
+            這裡放一番賞的玩法說明，例如每抽多少錢、賞品有哪些級別、如何抽選等。
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ===== 賞品分級：複製 gift-card 貼上即可增加賞項 ===== -->
+    <div class="gift-grid">
+      <div class="gift-card">
+        <svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="2"/><line x1="14" y1="14" x2="34" y2="14"/><line x1="14" y1="22" x2="34" y2="22"/></svg>
+        <h4>S賞</h4>
+        <p>放這個賞項的說明</p>
       </div>
-      <div class="stamp-circles" id="stampCircles">
-        <div class="stamp" data-letter="A"><span class="letter">A</span><span class="task">關卡一</span></div>
-        <div class="stamp" data-letter="B"><span class="letter">B</span><span class="task">關卡二</span></div>
-        <div class="stamp" data-letter="C"><span class="letter">C</span><span class="task">關卡三</span></div>
-        <div class="stamp" data-letter="D"><span class="letter">D</span><span class="task">關卡四</span></div>
+      <div class="gift-card">
+        <svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="2"/><line x1="14" y1="14" x2="34" y2="14"/><line x1="14" y1="22" x2="34" y2="22"/></svg>
+        <h4>A賞</h4>
+        <p>放這個賞項的說明</p>
+      </div>
+      <div class="gift-card">
+        <svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="2"/><line x1="14" y1="14" x2="34" y2="14"/><line x1="14" y1="22" x2="34" y2="22"/></svg>
+        <h4>B賞</h4>
+        <p>放這個賞項的說明</p>
       </div>
     </div>
+
   </div>
 </section>
 
