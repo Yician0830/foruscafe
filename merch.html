@@ -41,22 +41,23 @@
 
     <!-- ===== 商品清單：複製 gift-card 貼上即可增加商品，price 自行加在 h4 旁 ===== -->
     <div class="gift-grid">
-      <div class="gift-card">
+      <div class="gift-card" data-key="merch-1" data-stock="true" data-soldout-text="已售完">
         <svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="2"/><line x1="14" y1="14" x2="34" y2="14"/><line x1="14" y1="22" x2="34" y2="22"/></svg>
-        <h4>商品名稱</h4>
+        <h4>商品名稱1</h4>
         <p>NT$ 價格・簡短說明</p>
       </div>
-      <div class="gift-card">
+      <div class="gift-card" data-key="merch-2" data-stock="true" data-soldout-text="已售完">
         <svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="2"/><line x1="14" y1="14" x2="34" y2="14"/><line x1="14" y1="22" x2="34" y2="22"/></svg>
-        <h4>商品名稱</h4>
+        <h4>商品名稱2</h4>
         <p>NT$ 價格・簡短說明</p>
       </div>
-      <div class="gift-card">
+      <div class="gift-card" data-key="merch-3" data-stock="true" data-soldout-text="已售完">
         <svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="2"/><line x1="14" y1="14" x2="34" y2="14"/><line x1="14" y1="22" x2="34" y2="22"/></svg>
-        <h4>商品名稱</h4>
+        <h4>商品名稱3</h4>
         <p>NT$ 價格・簡短說明</p>
       </div>
     </div>
+    <p class="status-updated" id="statusUpdated">庫存資料讀取中…</p>
 
     <div class="badge-gift" style="margin-top:30px;">
       <span>★</span>
@@ -75,6 +76,10 @@
   </div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 <script src="script.js"></script>
+<script src="realtime.js"></script>
 </body>
 </html>

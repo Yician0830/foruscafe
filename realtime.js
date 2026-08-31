@@ -61,6 +61,41 @@ function applySlotStatus(map){
   });
 }
 
+function applyStockBadges(map){
+  document.querySelectorAll('.gift-card[data-stock="true"]').forEach(function(el){
+    const key = el.getAttribute('data-key');
+    const raw = map ? map[key] : undefined;
+    const soldoutText = el.getAttribute('data-soldout-text') || '已售完';
+    let badge = el.querySelector('.status-badge');
+    if(!badge){
+      badge = document.createElement('span');
+      badge.className = 'status-badge';
+      el.appendChild(badge);
+    }
+    let stamp = el.querySelector('.stamp');
+    const n = (raw === undefined || raw === '') ? null : parseInt(raw, 10);
+
+    if(n === null || isNaN(n)){
+      el.classList.remove('is-full');
+      if(stamp) stamp.remove();
+      badge.textContent = '';
+    } else if(n <= 0){
+      el.classList.add('is-full');
+      if(!stamp){
+        stamp = document.createElement('span');
+        stamp.className = 'stamp';
+        el.appendChild(stamp);
+      }
+      stamp.textContent = soldoutText;
+      badge.textContent = '';
+    } else {
+      el.classList.remove('is-full');
+      if(stamp) stamp.remove();
+      badge.textContent = '剩餘 ' + n + ' 份';
+    }
+  });
+}
+
 function subscribeStatus(){
   const db = firebase.firestore();
   const stampEl = document.getElementById('statusUpdated');
@@ -74,6 +109,7 @@ function subscribeStatus(){
     });
     applyGiftBadges(map);
     applySlotStatus(map);
+    applyStockBadges(map);
     if(stampEl){
       const now = new Date();
       stampEl.textContent = '即時連線中・最後同步 ' + now.toLocaleTimeString('zh-TW', { hour12:false });

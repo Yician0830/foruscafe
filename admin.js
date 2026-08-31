@@ -10,6 +10,12 @@ const ITEMS = [
   { key: 'slot-1300', label: '13:00–13:50',   type: 'slot' },
   { key: 'slot-1400', label: '14:00–14:50',   type: 'slot' },
   { key: 'slot-1500', label: '15:00–15:50',   type: 'slot' },
+  { key: 'lottery-s', label: 'S賞',           type: 'stock' },
+  { key: 'lottery-a', label: 'A賞',           type: 'stock' },
+  { key: 'lottery-b', label: 'B賞',           type: 'stock' },
+  { key: 'merch-1',   label: '商品名稱1',      type: 'stock' },
+  { key: 'merch-2',   label: '商品名稱2',      type: 'stock' },
+  { key: 'merch-3',   label: '商品名稱3',      type: 'stock' },
 ];
 const PRESETS = {
   gift: ['供應中', '已發完'],
@@ -26,6 +32,8 @@ const loginError = document.getElementById('loginError');
 const whoEl = document.getElementById('who');
 const giftGroup = document.getElementById('giftGroup');
 const slotGroup = document.getElementById('slotGroup');
+const lotteryGroup = document.getElementById('lotteryGroup');
+const merchGroup = document.getElementById('merchGroup');
 
 let currentValues = {};
 
@@ -69,6 +77,44 @@ function buildRow(item){
   current.className = 'current';
   current.textContent = '目前：讀取中…';
   row.appendChild(current);
+
+  if(item.type === 'stock'){
+    const numInput = document.createElement('input');
+    numInput.type = 'number';
+    numInput.min = '0';
+    numInput.placeholder = '剩餘數量';
+    numInput.style.width = '90px';
+    row.appendChild(numInput);
+
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'save-btn';
+    saveBtn.textContent = '更新';
+    row.appendChild(saveBtn);
+
+    const savedFlag = document.createElement('span');
+    savedFlag.className = 'saved-flag';
+    savedFlag.textContent = '已儲存 ✓';
+    row.appendChild(savedFlag);
+
+    saveBtn.addEventListener('click', function(){
+      const value = numInput.value.trim();
+      if(value === '' || isNaN(parseInt(value, 10))) return;
+      saveBtn.disabled = true;
+      db.collection('status').doc(item.key).set({
+        value: String(parseInt(value, 10)),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true }).then(function(){
+        saveBtn.disabled = false;
+        savedFlag.classList.add('show');
+        setTimeout(function(){ savedFlag.classList.remove('show'); }, 1800);
+      }).catch(function(err){
+        saveBtn.disabled = false;
+        alert('儲存失敗：' + err.message);
+      });
+    });
+
+    return row;
+  }
 
   const select = document.createElement('select');
   PRESETS[item.type].forEach(function(opt){
@@ -128,6 +174,12 @@ function renderGroups(){
   });
   ITEMS.filter(function(i){ return i.type === 'slot'; }).forEach(function(item){
     slotGroup.appendChild(buildRow(item));
+  });
+  ITEMS.filter(function(i){ return i.key.startsWith('lottery-'); }).forEach(function(item){
+    lotteryGroup.appendChild(buildRow(item));
+  });
+  ITEMS.filter(function(i){ return i.key.startsWith('merch-'); }).forEach(function(item){
+    merchGroup.appendChild(buildRow(item));
   });
 }
 
