@@ -11,7 +11,7 @@ function classifySlot(status, normal){
 }
 
 function applyGiftBadges(map){
-  document.querySelectorAll('.gift-card[data-key]').forEach(function(el){
+  document.querySelectorAll('.gift-card[data-key]:not([data-stock="true"])').forEach(function(el){
     const key = el.getAttribute('data-key');
     const status = map ? map[key] : undefined;
     const normal = el.getAttribute('data-normal') || '';
