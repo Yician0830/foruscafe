@@ -26,7 +26,7 @@ const ITEMS = [
   { key: 'merch-5',   label: '磁吸卡套',      type: 'stock' },
 ];
 const PRESETS = {
-  gift: ['供應中', '已發完'],
+  gift: ['未開放','供應中', '已發完'],
   slot: ['開放中', '未開放', '已額滿'],
 };
 
