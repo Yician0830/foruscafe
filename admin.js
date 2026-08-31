@@ -19,9 +19,11 @@ const ITEMS = [
    { key: 'lottery-f', label: 'Q版造型吊飾(10款隨機)',           type: 'stock' },
    { key: 'lottery-g', label: 'Q版漢堡大頭扇',           type: 'stock' },
    { key: 'lottery-h', label: '便利貼',           type: 'stock' },
-  { key: 'merch-1',   label: '商品名稱1',      type: 'stock' },
-  { key: 'merch-2',   label: '商品名稱2',      type: 'stock' },
-  { key: 'merch-3',   label: '商品名稱3',      type: 'stock' },
+  { key: 'merch-1',   label: '60*30 閃粉手幅',      type: 'stock' },
+  { key: 'merch-2',   label: '迷你小手幅',      type: 'stock' },
+  { key: 'merch-3',   label: 'Q版吊飾組/單購',      type: 'stock' },
+  { key: 'merch-4',   label: 'Q版造型磁鐵',      type: 'stock' },
+  { key: 'merch-5',   label: '磁吸卡套',      type: 'stock' },
 ];
 const PRESETS = {
   gift: ['供應中', '已發完'],
