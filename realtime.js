@@ -66,6 +66,7 @@ function applyStockBadges(map){
     const key = el.getAttribute('data-key');
     const raw = map ? map[key] : undefined;
     const soldoutText = el.getAttribute('data-soldout-text') || '已售完';
+    const hideCount = el.getAttribute('data-hide-count') === 'true';
     let badge = el.querySelector('.status-badge');
     if(!badge){
       badge = document.createElement('span');
@@ -91,7 +92,7 @@ function applyStockBadges(map){
     } else {
       el.classList.remove('is-full');
       if(stamp) stamp.remove();
-      badge.textContent = '剩餘 ' + n + ' 份';
+      badge.textContent = hideCount ? '' : ('剩餘 ' + n + ' 份');
     }
   });
 }
