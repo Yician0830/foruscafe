@@ -47,11 +47,11 @@ function applySlotStatus(map){
         : result.state === 'open' ? '開放預約中' : '';
     }
 
-    let stamp = el.querySelector('.stamp');
+    let stamp = el.querySelector('.status-stamp');
     if(result.state === 'full'){
       if(!stamp){
         stamp = document.createElement('span');
-        stamp.className = 'stamp';
+        stamp.className = 'status-stamp';
         el.appendChild(stamp);
       }
       stamp.textContent = result.label || '已額滿';
@@ -73,7 +73,7 @@ function applyStockBadges(map){
       badge.className = 'status-badge';
       el.appendChild(badge);
     }
-    let stamp = el.querySelector('.stamp');
+    let stamp = el.querySelector('.status-stamp');
     const n = (raw === undefined || raw === '') ? null : parseInt(raw, 10);
 
     if(n === null || isNaN(n)){
@@ -84,7 +84,7 @@ function applyStockBadges(map){
       el.classList.add('is-full');
       if(!stamp){
         stamp = document.createElement('span');
-        stamp.className = 'stamp';
+        stamp.className = 'status-stamp';
         el.appendChild(stamp);
       }
       stamp.textContent = soldoutText;
