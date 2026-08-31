@@ -12,7 +12,7 @@ const ITEMS = [
   { key: 'slot-1500', label: '15:00–15:50',   type: 'slot' },
   { key: 'lottery-s', label: 'ARIRANG 泰亨封面黑膠唱片',           type: 'stock' },
   { key: 'lottery-a', label: 'BT21XSNOWPEAK TATA吊飾',           type: 'stock' },
-  { key: 'lottery-b', label: 'B賞',           type: 'stock' },
+  { key: 'lottery-b', label: '10吋無框畫',           type: 'stock' },
   { key: 'merch-1',   label: '商品名稱1',      type: 'stock' },
   { key: 'merch-2',   label: '商品名稱2',      type: 'stock' },
   { key: 'merch-3',   label: '商品名稱3',      type: 'stock' },
