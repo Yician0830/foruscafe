@@ -10,7 +10,7 @@ const ITEMS = [
   { key: 'slot-1300', label: '13:00–13:50',   type: 'slot' },
   { key: 'slot-1400', label: '14:00–14:50',   type: 'slot' },
   { key: 'slot-1500', label: '15:00–15:50',   type: 'slot' },
-  { key: 'lottery-s', label: 'S賞',           type: 'stock' },
+  { key: 'lottery-s', label: 'ARIRANG 泰亨封面黑膠唱片',           type: 'stock' },
   { key: 'lottery-a', label: 'A賞',           type: 'stock' },
   { key: 'lottery-b', label: 'B賞',           type: 'stock' },
   { key: 'merch-1',   label: '商品名稱1',      type: 'stock' },
