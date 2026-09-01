@@ -142,20 +142,25 @@
 
   /* ---- back: task detail ---- */
   .stamp-back{
-    transform:rotateY(180deg);
-    background:linear-gradient(160deg,#4a5c92,#31406e);
-    color:#f3f5ff;
-    padding:22px 20px;
-    text-align:center;
-    box-shadow:0 14px 30px -14px rgba(30,40,80,.55);
-  }
-  .stamp-back .back-letter{
-    font-family:'Cormorant Garamond', serif;
-    font-size:13px;
-    letter-spacing:3px;
-    color:#b9c6f2;
-    margin-bottom:6px;
-  }
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:26px 20px 18px;
+  /* 其餘背景/陰影樣式維持不變 */
+}
+.back-title{
+  position:absolute;
+  top:18px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-family:'Zen Maru Gothic', sans-serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:2px;
+  color:#c7d3f7;
+}
   .stamp-back p{
     font-family:'Noto Sans TC', sans-serif;
     font-size:12.5px;
@@ -299,29 +304,26 @@
           <div class="stamp-inner">
             <div class="stamp-face stamp-front">
   <div class="stamp-check">✓</div>
-  <img class="stamp-photo" src="images/stamp-a.png" alt="關卡一">
+  <img class="stamp-photo" src="images/印章1.png" alt="關卡一">
   <span class="stamp-tap-hint">TAP</span>
 </div>
             <div class="stamp-face stamp-back">
-              <div class="back-letter">關卡一 · A</div>
-              <p>消費應援套餐後，憑收據找工作人員領取應援物與蓋章</p>
-              <div class="back-hint">再次點擊翻回正面</div>
-            </div>
+  <div class="back-title">關卡一</div>
+  <p>消費應援套餐後，憑收據找工作人員領取應援物與蓋章</p>
+  <div class="back-hint">再次點擊翻回正面</div>
+</div>
           </div>
         </div>
 
         <div class="stamp-card" data-letter="B">
           <div class="stamp-inner">
             <div class="stamp-face stamp-front">
-              <div class="stamp-check">✓</div>
-              <div class="stamp-mark">
-                <span class="stamp-letter">B</span>
-                <span class="stamp-stage">關卡二</span>
-              </div>
-              <span class="stamp-tap-hint">TAP</span>
-            </div>
+  <div class="stamp-check">✓</div>
+  <img class="stamp-photo" src="images/印章2.png" alt="關卡二">
+  <span class="stamp-tap-hint">TAP</span>
+</div>
             <div class="stamp-face stamp-back">
-              <div class="back-letter">關卡二 · B</div>
+              <div class="back-title">關卡二 · B</div>
               <p>拍攝活動現場發布至社群平台上，憑打卡畫面找工作人員</p>
               <div class="back-hint">再次點擊翻回正面</div>
             </div>
@@ -331,15 +333,12 @@
         <div class="stamp-card" data-letter="C">
           <div class="stamp-inner">
             <div class="stamp-face stamp-front">
-              <div class="stamp-check">✓</div>
-              <div class="stamp-mark">
-                <span class="stamp-letter">C</span>
-                <span class="stamp-stage">關卡三</span>
-              </div>
-              <span class="stamp-tap-hint">TAP</span>
-            </div>
+  <div class="stamp-check">✓</div>
+  <img class="stamp-photo" src="images/印章3.png" alt="關卡三">
+  <span class="stamp-tap-hint">TAP</span>
+</div>
             <div class="stamp-face stamp-back">
-              <div class="back-letter">關卡三 · C</div>
+              <div class="back-title">關卡三 · C</div>
               <p>咖啡廳內藏有7隻出道小胖彈，全部找出後可以蓋章（每天站位皆會不同）</p>
               <div class="back-hint">再次點擊翻回正面</div>
             </div>
@@ -349,15 +348,12 @@
         <div class="stamp-card" data-letter="D">
           <div class="stamp-inner">
             <div class="stamp-face stamp-front">
-              <div class="stamp-check">✓</div>
-              <div class="stamp-mark">
-                <span class="stamp-letter">D</span>
-                <span class="stamp-stage">關卡四</span>
-              </div>
-              <span class="stamp-tap-hint">TAP</span>
-            </div>
+  <div class="stamp-check">✓</div>
+  <img class="stamp-photo" src="images/印章4.png" alt="關卡四">
+  <span class="stamp-tap-hint">TAP</span>
+</div>
             <div class="stamp-face stamp-back">
-              <div class="back-letter">關卡四 · D</div>
+              <div class="back-title">關卡四 · D</div>
               <p>完成特別小活動任1項，即可找工作人員兌換獎章</p>
               <div class="back-hint">再次點擊翻回正面</div>
             </div>
