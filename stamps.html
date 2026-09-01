@@ -72,19 +72,13 @@
     border-radius:50%;
     border:1.5px solid rgba(90,110,170,.55);
   }
-  .stamp-front::after{
-    content:"✦ FOR US ✦";
-    position:absolute;
-    top:24px;
-    left:0;
-    right:0;
-    text-align:center;
-    font-family:'Cormorant Garamond', serif;
-    font-size:11px;
-    letter-spacing:3px;
-    color:rgba(70,90,150,.55);
-    mix-blend-mode:multiply;
-  }
+ .stamp-photo{
+  width:76%;
+  height:76%;
+  object-fit:contain;
+  border-radius:50%;
+  pointer-events:none;
+}
   .stamp-card.collected .stamp-front{
     background:
       radial-gradient(circle at 32% 28%, rgba(255,255,255,.5), rgba(255,255,255,0) 55%),
@@ -304,13 +298,10 @@
         <div class="stamp-card" data-letter="A">
           <div class="stamp-inner">
             <div class="stamp-face stamp-front">
-              <div class="stamp-check">✓</div>
-              <div class="stamp-mark">
-                <span class="stamp-letter">A</span>
-                <span class="stamp-stage">關卡一</span>
-              </div>
-              <span class="stamp-tap-hint">TAP</span>
-            </div>
+  <div class="stamp-check">✓</div>
+  <img class="stamp-photo" src="images/stamp-a.png" alt="關卡一">
+  <span class="stamp-tap-hint">TAP</span>
+</div>
             <div class="stamp-face stamp-back">
               <div class="back-letter">關卡一 · A</div>
               <p>消費應援套餐後，憑收據找工作人員領取應援物與蓋章</p>
