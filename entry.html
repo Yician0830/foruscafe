@@ -8,6 +8,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== 預約按鈕：時間到才會解鎖 ===== */
+  .reserve-cta{ text-align:center; margin:0 0 10px; }
+  .reserve-btn{
+    display:inline-flex; flex-direction:column; align-items:center; gap:4px;
+    padding:16px 40px; border-radius:999px; text-decoration:none;
+    font-family:'Zen Maru Gothic','Noto Sans TC',sans-serif;
+    transition:transform .25s ease, background .3s ease, box-shadow .3s ease;
+  }
+  .reserve-btn-label{ font-size:16px; font-weight:700; letter-spacing:1px; }
+  .reserve-btn-sub{ font-size:11.5px; letter-spacing:1px; opacity:.85; }
+
+  /* 尚未開放：灰階、不可點擊 */
+  .reserve-btn.is-locked{
+    background:#dfe3e8; color:#8a95a1; cursor:not-allowed;
+    pointer-events:none; box-shadow:none;
+  }
+
+  /* 已開放：可點擊，主色調 + 懸停效果 */
+  .reserve-btn.is-open{
+    background:var(--navy-deep); color:#f3f8fc;
+    box-shadow:0 14px 30px -16px rgba(28,51,80,.55);
+  }
+  .reserve-btn.is-open:hover{ transform:translateY(-3px); }
+</style>
 </head>
 <body>
 
@@ -35,6 +60,17 @@
   <div class="eyebrow">How to Enter</div>
   <h1>入場方式</h1>
   <p class="lede">預約制優先，也保留現場排隊名額</p>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="reserve-cta">
+      <a href="#" id="reserveBtn" class="reserve-btn is-locked" aria-disabled="true" target="_blank" rel="noopener">
+        <span class="reserve-btn-label">立即預約</span>
+        <span class="reserve-btn-sub" id="reserveSub">開放時間讀取中…</span>
+      </a>
+    </div>
+  </div>
 </section>
 
 <section style="padding-top:0;">
@@ -115,5 +151,42 @@
 <script src="firebase-config.js"></script>
 <script src="script.js"></script>
 <script src="realtime.js"></script>
+<script>
+(function(){
+  // ★★★ 這裡改成實際開放預約的時間（台灣時間 +08:00） ★★★
+  var OPEN_AT = new Date('2026-11-19T10:00:00+08:00').getTime();
+  // ★★★ 這裡改成實際的預約網址（Google表單／訂位系統連結） ★★★
+  var BOOKING_URL = 'https://example.com/請換成你的預約連結';
+
+  var btn = document.getElementById('reserveBtn');
+  var sub = document.getElementById('reserveSub');
+  if(!btn) return;
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function render(){
+    var now = Date.now();
+    if(now >= OPEN_AT){
+      btn.classList.remove('is-locked');
+      btn.classList.add('is-open');
+      btn.href = BOOKING_URL;
+      btn.removeAttribute('aria-disabled');
+      sub.textContent = '點我前往預約 →';
+    } else {
+      var d = new Date(OPEN_AT);
+      var text = d.getFullYear() + '.' + pad(d.getMonth() + 1) + '.' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ' 開放預約';
+      btn.classList.add('is-locked');
+      btn.classList.remove('is-open');
+      btn.removeAttribute('href');
+      btn.setAttribute('aria-disabled', 'true');
+      sub.textContent = text;
+    }
+  }
+
+  render();
+  // 每 30 秒重新檢查一次，時間到會自動解鎖，不用重新整理頁面
+  setInterval(render, 30000);
+})();
+</script>
 </body>
 </html>
