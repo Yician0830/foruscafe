@@ -97,6 +97,14 @@ function applyStockBadges(map){
   });
 }
 
+// 現場叫號看板：直接把數字塞進 entry.html 裡的 #queueCurrent / #queueIssued
+function applyQueueDisplay(map){
+  const curEl = document.getElementById('queueCurrent');
+  const issEl = document.getElementById('queueIssued');
+  if(curEl) curEl.textContent = (map && map['queue-current']) ? map['queue-current'] : '—';
+  if(issEl) issEl.textContent = (map && map['queue-issued']) ? map['queue-issued'] : '—';
+}
+
 function subscribeStatus(){
   const db = firebase.firestore();
   const stampEl = document.getElementById('statusUpdated');
@@ -111,6 +119,7 @@ function subscribeStatus(){
     applyGiftBadges(map);
     applySlotStatus(map);
     applyStockBadges(map);
+    applyQueueDisplay(map);
     if(stampEl){
       const now = new Date();
       stampEl.textContent = '即時連線中・最後同步 ' + now.toLocaleTimeString('zh-TW', { hour12:false });
@@ -121,6 +130,6 @@ function subscribeStatus(){
   });
 }
 
-if(document.querySelector('[data-key]')){
+if(document.querySelector('[data-key]') || document.getElementById('queueCurrent')){
   subscribeStatus();
 }

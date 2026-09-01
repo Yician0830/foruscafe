@@ -10,6 +10,8 @@ const ITEMS = [
   { key: 'slot-1300', label: '13:00–13:50',   type: 'slot' },
   { key: 'slot-1400', label: '14:00–14:50',   type: 'slot' },
   { key: 'slot-1500', label: '15:00–15:50',   type: 'slot' },
+  { key: 'queue-current', label: '目前叫號',   type: 'stock' },
+  { key: 'queue-issued',  label: '已發放至',   type: 'stock' },
   { key: 'lottery-s', label: 'S賞ARIRANG 泰亨封面黑膠唱片',           type: 'stock' },
   { key: 'lottery-a', label: 'A賞BT21XSNOWPEAK TATA吊飾',           type: 'stock' },
   { key: 'lottery-b', label: 'B賞10吋無框畫',           type: 'stock' },
@@ -41,6 +43,7 @@ const loginError = document.getElementById('loginError');
 const whoEl = document.getElementById('who');
 const giftGroup = document.getElementById('giftGroup');
 const slotGroup = document.getElementById('slotGroup');
+const queueGroup = document.getElementById('queueGroup');
 const lotteryGroup = document.getElementById('lotteryGroup');
 const merchGroup = document.getElementById('merchGroup');
 
@@ -107,7 +110,7 @@ function buildRow(item){
     const numInput = document.createElement('input');
     numInput.type = 'number';
     numInput.min = '0';
-    numInput.placeholder = '剩餘數量';
+    numInput.placeholder = '輸入數字';
     numInput.style.width = '90px';
     row.appendChild(numInput);
     numInput.addEventListener('input', function(){ row.dataset.dirty = 'true'; });
@@ -199,6 +202,9 @@ function renderGroups(){
   });
   ITEMS.filter(function(i){ return i.type === 'slot'; }).forEach(function(item){
     slotGroup.appendChild(buildRow(item));
+  });
+  ITEMS.filter(function(i){ return i.key.startsWith('queue-'); }).forEach(function(item){
+    queueGroup.appendChild(buildRow(item));
   });
   ITEMS.filter(function(i){ return i.key.startsWith('lottery-'); }).forEach(function(item){
     lotteryGroup.appendChild(buildRow(item));
