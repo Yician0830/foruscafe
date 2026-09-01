@@ -77,7 +77,7 @@ img{max-width:100%;display:block;}
 @keyframes fall{ to{ transform:translateY(115vh) translateX(var(--drift,0px)); } }
 
 .eyebrow{
-  font-family:'Cormorant Garamond','Zen Maru Gothic', serif; font-style:italic; letter-spacing:4px;
+  font-family:'Cormorant Garamond','Zen Maru Gothic', serif; letter-spacing:4px;
   font-size:14px; color:var(--blue-mid); text-transform:uppercase; margin-bottom:20px; z-index:2;
 }
 .hero h1{
