@@ -8,6 +8,235 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== Stamp icon + flip card ===== */
+  .stamp-circles{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:56px 48px;
+    perspective:1600px;
+  }
+  @media (max-width:640px){
+    .stamp-circles{grid-template-columns:1fr; gap:44px;}
+  }
+
+  .stamp-card{
+    position:relative;
+    width:100%;
+    max-width:230px;
+    aspect-ratio:1/1;
+    margin:0 auto;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .stamp-card:nth-child(1) .stamp-inner{ --tilt:-6deg; }
+  .stamp-card:nth-child(2) .stamp-inner{ --tilt:4deg; }
+  .stamp-card:nth-child(3) .stamp-inner{ --tilt:5deg; }
+  .stamp-card:nth-child(4) .stamp-inner{ --tilt:-4deg; }
+
+  .stamp-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:transform .7s cubic-bezier(.22,.68,0,1.02);
+    transform-style:preserve-3d;
+    transform:rotate(var(--tilt,0deg));
+  }
+  .stamp-card.is-flipped .stamp-inner{
+    transform:rotate(0deg) rotateY(180deg);
+  }
+
+  .stamp-face{
+    position:absolute;
+    inset:0;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* ---- front: rubber-stamp look ---- */
+  .stamp-front{
+    background:
+      radial-gradient(circle at 32% 28%, rgba(255,255,255,.65), rgba(255,255,255,0) 55%),
+      #eef2fb;
+    border:2px dashed #aebfe6;
+    box-shadow:0 10px 24px -14px rgba(60,80,140,.45), inset 0 0 0 8px rgba(255,255,255,.5);
+  }
+  .stamp-front::before{
+    content:"";
+    position:absolute;
+    inset:14px;
+    border-radius:50%;
+    border:1.5px solid rgba(90,110,170,.55);
+  }
+  .stamp-front::after{
+    content:"✦ FOR US ✦";
+    position:absolute;
+    top:24px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-size:11px;
+    letter-spacing:3px;
+    color:rgba(70,90,150,.55);
+    mix-blend-mode:multiply;
+  }
+  .stamp-card.collected .stamp-front{
+    background:
+      radial-gradient(circle at 32% 28%, rgba(255,255,255,.5), rgba(255,255,255,0) 55%),
+      #dfe8fb;
+    border-color:#7e97d6;
+  }
+  .stamp-front .stamp-mark{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2px;
+    color:#3a4a78;
+    mix-blend-mode:multiply;
+    opacity:.85;
+  }
+  .stamp-letter{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:58px;
+    line-height:1;
+  }
+  .stamp-stage{
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-size:12px;
+    letter-spacing:1px;
+    color:#5a6ba0;
+  }
+  .stamp-tap-hint{
+    position:absolute;
+    bottom:16px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:10px;
+    letter-spacing:2px;
+    color:rgba(90,110,170,.5);
+    font-family:'Noto Sans TC', sans-serif;
+  }
+  .stamp-check{
+    position:absolute;
+    top:8px;
+    right:14px;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#5a76c8;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    box-shadow:0 4px 10px -4px rgba(60,80,140,.6);
+    opacity:0;
+    transform:scale(.6);
+    transition:all .35s ease;
+  }
+  .stamp-card.collected .stamp-check{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  /* ---- back: task detail ---- */
+  .stamp-back{
+    transform:rotateY(180deg);
+    background:linear-gradient(160deg,#4a5c92,#31406e);
+    color:#f3f5ff;
+    padding:22px 20px;
+    text-align:center;
+    box-shadow:0 14px 30px -14px rgba(30,40,80,.55);
+  }
+  .stamp-back .back-letter{
+    font-family:'Cormorant Garamond', serif;
+    font-size:13px;
+    letter-spacing:3px;
+    color:#b9c6f2;
+    margin-bottom:6px;
+  }
+  .stamp-back p{
+    font-family:'Noto Sans TC', sans-serif;
+    font-size:12.5px;
+    line-height:1.6;
+    color:#eef1ff;
+    margin:0;
+  }
+  .stamp-back .back-hint{
+    margin-top:10px;
+    font-size:10px;
+    letter-spacing:1px;
+    color:#9fb0e6;
+  }
+
+  /* ===== Detail section below ===== */
+  .stamp-detail-section{
+    padding-top:10px;
+  }
+  .detail-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+    margin-top:36px;
+  }
+  @media (max-width:760px){
+    .detail-grid{grid-template-columns:1fr;}
+  }
+  .detail-card{
+    position:relative;
+    background:#f7f9ff;
+    border:1px solid #dde5f8;
+    border-radius:18px;
+    padding:26px 26px 24px;
+    display:flex;
+    gap:18px;
+  }
+  .detail-badge{
+    flex:0 0 auto;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:#eef2fb;
+    border:1.5px dashed #aebfe6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:24px;
+    color:#3a4a78;
+  }
+  .detail-body h3{
+    margin:2px 0 6px;
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-size:16px;
+    color:#33415c;
+  }
+  .detail-body p{
+    margin:0 0 8px;
+    font-family:'Noto Sans TC', sans-serif;
+    font-size:13.5px;
+    line-height:1.75;
+    color:#556082;
+  }
+  .detail-body .detail-tip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    color:#5a76c8;
+    background:#eaf0ff;
+    padding:5px 10px;
+    border-radius:999px;
+  }
+</style>
 </head>
 <body>
 
@@ -68,18 +297,135 @@
           集滿四枚印章後，即可向工作人員兌換限定小禮物。
         </p>
         <div class="prize">🎁 集滿 4 枚兌換「PP夾」（兩款隨機發放，數量有限送完為止）</div>
+        <p class="desc" style="margin-top:14px; font-size:12.5px; opacity:.75;">✦ 點擊印章即可翻面查看關卡內容</p>
       </div>
       <div class="stamp-circles" id="stampCircles">
-        <div class="stamp" data-letter="A"><span class="letter">A</span><span class="task">關卡一 <P>消費應援套餐後，憑收據找工作人員領取應援物與蓋章</P></span></div>
-        <div class="stamp" data-letter="B"><span class="letter">B</span><span class="task">關卡二 <P>拍攝活動現場發布至社群平台上，憑打卡畫面找工作人員</P></span></div>
-        <div class="stamp" data-letter="C"><span class="letter">C</span><span class="task">關卡三 <P>咖啡廳內藏有7隻出道小胖彈，全部找出後可以蓋章(每天站位皆會不同)</P></span></div>
-        <div class="stamp" data-letter="D"><span class="letter">D</span><span class="task">關卡四 <P>完成特別小活動任1項，即可找工作人員兌換獎章</P></span></div>
+
+        <div class="stamp-card" data-letter="A">
+          <div class="stamp-inner">
+            <div class="stamp-face stamp-front">
+              <div class="stamp-check">✓</div>
+              <div class="stamp-mark">
+                <span class="stamp-letter">A</span>
+                <span class="stamp-stage">關卡一</span>
+              </div>
+              <span class="stamp-tap-hint">TAP</span>
+            </div>
+            <div class="stamp-face stamp-back">
+              <div class="back-letter">關卡一 · A</div>
+              <p>消費應援套餐後，憑收據找工作人員領取應援物與蓋章</p>
+              <div class="back-hint">再次點擊翻回正面</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stamp-card" data-letter="B">
+          <div class="stamp-inner">
+            <div class="stamp-face stamp-front">
+              <div class="stamp-check">✓</div>
+              <div class="stamp-mark">
+                <span class="stamp-letter">B</span>
+                <span class="stamp-stage">關卡二</span>
+              </div>
+              <span class="stamp-tap-hint">TAP</span>
+            </div>
+            <div class="stamp-face stamp-back">
+              <div class="back-letter">關卡二 · B</div>
+              <p>拍攝活動現場發布至社群平台上，憑打卡畫面找工作人員</p>
+              <div class="back-hint">再次點擊翻回正面</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stamp-card" data-letter="C">
+          <div class="stamp-inner">
+            <div class="stamp-face stamp-front">
+              <div class="stamp-check">✓</div>
+              <div class="stamp-mark">
+                <span class="stamp-letter">C</span>
+                <span class="stamp-stage">關卡三</span>
+              </div>
+              <span class="stamp-tap-hint">TAP</span>
+            </div>
+            <div class="stamp-face stamp-back">
+              <div class="back-letter">關卡三 · C</div>
+              <p>咖啡廳內藏有7隻出道小胖彈，全部找出後可以蓋章（每天站位皆會不同）</p>
+              <div class="back-hint">再次點擊翻回正面</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stamp-card" data-letter="D">
+          <div class="stamp-inner">
+            <div class="stamp-face stamp-front">
+              <div class="stamp-check">✓</div>
+              <div class="stamp-mark">
+                <span class="stamp-letter">D</span>
+                <span class="stamp-stage">關卡四</span>
+              </div>
+              <span class="stamp-tap-hint">TAP</span>
+            </div>
+            <div class="stamp-face stamp-back">
+              <div class="back-letter">關卡四 · D</div>
+              <p>完成特別小活動任1項，即可找工作人員兌換獎章</p>
+              <div class="back-hint">再次點擊翻回正面</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
+<div class="divider"><span>✦</span><span>✦</span><span>✦</span></div>
+<section class="stamp-detail-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Checkpoints</div>
+      <h2>關卡詳細介紹</h2>
+      <p class="desc">每個關卡都藏著不同的小驚喜，慢慢逛、慢慢集，四枚都不要錯過</p>
+    </div>
 
+    <div class="detail-grid">
+      <div class="detail-card">
+        <div class="detail-badge">A</div>
+        <div class="detail-body">
+          <h3>關卡一・應援套餐</h3>
+          <p>點選現場的應援套餐並完成消費後，收據就是你的通關證明。將收據交給工作人員，就能領取專屬應援小物，並在集章卡上蓋下第一枚印章，開啟這趟集章旅程。</p>
+          <span class="detail-tip">💳 記得保留收據</span>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-badge">B</div>
+        <div class="detail-body">
+          <h3>關卡二・社群打卡</h3>
+          <p>在現場拍下喜歡的角落或應援物，發布到你的社群平台（限時動態也可以），並將打卡畫面出示給工作人員看，就能順利完成第二關的任務並獲得蓋章。</p>
+          <span class="detail-tip">📱 記得公開貼文</span>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-badge">C</div>
+        <div class="detail-body">
+          <h3>關卡三・尋找小胖彈</h3>
+          <p>咖啡廳裡悄悄藏了 7 隻出道造型的小胖彈，散落在店內各個角落，而且每天躲藏的位置都不太一樣。仔細找找看，把全部 7 隻都找出來後，就能向工作人員兌換第三枚印章。</p>
+          <span class="detail-tip">🔍 位置每日更換</span>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-badge">D</div>
+        <div class="detail-body">
+          <h3>關卡四・特別小活動</h3>
+          <p>現場備有幾項特別小活動，只要任選其中一項完成，就能找工作人員兌換最後一枚獎章。完成四個關卡、集滿印章後，記得到櫃台兌換限定「PP夾」小禮物。</p>
+          <span class="detail-tip">🎯 任選一項即可</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="container">
@@ -91,5 +437,12 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+  document.querySelectorAll('.stamp-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      card.classList.toggle('is-flipped');
+    });
+  });
+</script>
 </body>
 </html>
