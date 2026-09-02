@@ -62,6 +62,29 @@
   }
   .decor-credit-group.open .decor-credit-content{ display:block; }
 
+  .decor-photo.has-img{ cursor:zoom-in; }
+
+  .decor-lightbox{
+    display:none; position:fixed; inset:0; z-index:999;
+    background:rgba(15,20,35,.88);
+    align-items:center; justify-content:center;
+    padding:40px 20px;
+  }
+  .decor-lightbox.open{ display:flex; }
+  .decor-lightbox img{
+    max-width:92vw; max-height:88vh; border-radius:12px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+  }
+  .decor-lightbox-close{
+    position:absolute; top:20px; right:24px;
+    width:40px; height:40px; border-radius:50%;
+    background:rgba(255,255,255,.12); color:#fff;
+    border:none; font-size:20px; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s ease;
+  }
+  .decor-lightbox-close:hover{ background:rgba(255,255,255,.22); }
+
   @media (max-width:640px){
     .decor-photo-grid{ grid-template-columns:repeat(2,1fr); }
     .decor-tab-btn{ font-size:12px; padding:9px 16px; }
@@ -323,6 +346,11 @@
   </div>
 </section>
 
+<div class="decor-lightbox" id="decorLightbox">
+  <button class="decor-lightbox-close" id="decorLightboxClose" aria-label="關閉">✕</button>
+  <img src="" alt="" id="decorLightboxImg">
+</div>
+
 <footer>
   <div class="container">
     <img src="images/logo.png" alt="For Us" class="footer-logo">
@@ -347,6 +375,30 @@
     header.addEventListener('click', function(){
       header.parentElement.classList.toggle('open');
     });
+  });
+
+  var lightbox = document.getElementById('decorLightbox');
+  var lightboxImg = document.getElementById('decorLightboxImg');
+  var lightboxClose = document.getElementById('decorLightboxClose');
+
+  document.querySelectorAll('.decor-photo').forEach(function(photo){
+    var img = photo.querySelector('img');
+    if(!img) return;
+    photo.classList.add('has-img');
+    photo.addEventListener('click', function(){
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+
+  function closeLightbox(){ lightbox.classList.remove('open'); lightboxImg.src = ''; }
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){
+    if(e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeLightbox();
   });
 </script>
 </body>
