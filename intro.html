@@ -167,6 +167,10 @@
   }
   runSequence(2000);
 
+  enterBtn.addEventListener('click', function(){
+    sessionStorage.setItem('forus_intro_seen', '1');
+  });
+
   skipBtn.addEventListener('click', function(){
     timers.forEach(clearTimeout);
     scene.classList.add('pan');
