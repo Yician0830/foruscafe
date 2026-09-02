@@ -13,6 +13,7 @@ const ITEMS = [
   { key: 'slot-1500', label: '15:00–15:50',   type: 'slot' },
   { key: 'queue-current', label: '目前叫號',   type: 'stock' },
   { key: 'queue-issued',  label: '已發放至',   type: 'stock' },
+  { key: 'lottery-drawn', label: '今日已抽數（滿額100）', type: 'stock' },
   { key: 'lottery-s', label: 'S賞ARIRANG 泰亨封面黑膠唱片',           type: 'stock' },
   { key: 'lottery-a', label: 'A賞BT21XSNOWPEAK TATA吊飾',           type: 'stock' },
   { key: 'lottery-b', label: 'B賞10吋無框畫',           type: 'stock' },

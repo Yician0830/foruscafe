@@ -121,6 +121,18 @@ function applyQueueDisplay(map){
   if(issEl) issEl.textContent = (map && map['queue-issued']) ? map['queue-issued'] : '—';
 }
 
+// 一番賞今日已抽數：把數字換算成進度條寬度，塞進 lottery.html 的 #lotteryDrawnBar
+function applyLotteryProgress(map){
+  const countEl = document.getElementById('lotteryDrawnCount');
+  const barEl = document.getElementById('lotteryDrawnBar');
+  if(!countEl || !barEl) return;
+  const raw = map ? map['lottery-drawn'] : undefined;
+  const n = (raw === undefined || raw === '') ? 0 : parseInt(raw, 10);
+  const safe = isNaN(n) ? 0 : Math.max(0, Math.min(n, 100));
+  countEl.textContent = safe;
+  barEl.style.width = safe + '%';
+}
+
 function subscribeStatus(){
   const db = firebase.firestore();
   const stampEl = document.getElementById('statusUpdated');
@@ -136,6 +148,7 @@ function subscribeStatus(){
     applySlotStatus(map);
     applyStockBadges(map);
     applyQueueDisplay(map);
+    applyLotteryProgress(map);
     if(stampEl){
       const now = new Date();
       stampEl.textContent = '即時連線中・最後同步 ' + now.toLocaleTimeString('zh-TW', { hour12:false });

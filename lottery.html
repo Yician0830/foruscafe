@@ -8,7 +8,47 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-</head>
+<style>
+  /* ===== 今日已抽進度條 ===== */
+  .lottery-progress{
+    margin-bottom:26px; padding:18px 20px; border-radius:14px;
+    background:var(--card-tint); border:1px solid var(--line);
+  }
+  .lottery-progress .lp-top{
+    display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;
+    font-family:'Zen Maru Gothic','Noto Sans TC',sans-serif;
+  }
+  .lottery-progress .lp-label{ font-size:14px; color:var(--navy-deep); font-weight:500; }
+  .lottery-progress .lp-count{ font-size:13px; color:var(--blue-mid); }
+  .lottery-progress .lp-count b{ font-size:18px; color:var(--navy-deep); }
+  .lp-bar-outer{ height:14px; border-radius:999px; background:#e4e9f0; overflow:hidden; }
+  .lp-bar-inner{
+    height:100%; width:0%; border-radius:999px;
+    background:linear-gradient(90deg,#8fa8e0,var(--navy-deep));
+    transition:width .5s ease;
+  }
+
+  /* ===== 現金限定提示 ===== */
+  .cash-alert{
+    display:flex; align-items:flex-start; gap:10px; margin-top:14px;
+    background:#fff4e8; border:1px solid #f0c98f; border-radius:12px;
+    padding:12px 14px;
+  }
+  .cash-alert .ca-icon{ font-size:18px; flex:0 0 auto; line-height:1.3; }
+  .cash-alert p{ margin:0; font-size:13px; color:#8a5a1f; line-height:1.7; }
+  .cash-alert b{ color:#7a3f0a; }
+
+  /* ===== S賞最高賞視覺強化 ===== */
+  .gift-card.top-prize{
+    position:relative; border:2px solid #e0b64a;
+    box-shadow:0 0 0 4px rgba(224,182,74,.18), var(--shadow);
+  }
+  .gift-card.top-prize .crown-icon{
+    position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+    font-size:22px; filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));
+  }
+  .gift-card.top-prize h4{ color:#a8791a; }
+</style></head>
 <body>
 
 <header class="site-nav">
@@ -48,15 +88,31 @@
           <span class="ic">◆</span>
           <div>
             <b>How to Play</b>
-            每日100抽，每抽$100一人一抽。<P>只收取現金，再麻煩事先準備好</P>
+            每日100抽，每抽$100一人一抽。
           </div>
         </li>
       </ul>
+      <div class="cash-alert">
+        <span class="ca-icon">💵</span>
+        <p><b>僅收現金</b>，恕不提供刷卡或行動支付，請提前準備好現金再來排隊抽獎喔！</p>
+      </div>
+    </div>
+
+    <!-- ===== 今日已抽數：串接後台 lottery-drawn，會即時同步 ===== -->
+    <div class="lottery-progress">
+      <div class="lp-top">
+        <span class="lp-label">🎯 今日已抽數</span>
+        <span class="lp-count"><b id="lotteryDrawnCount">0</b> / 100 抽</span>
+      </div>
+      <div class="lp-bar-outer">
+        <div class="lp-bar-inner" id="lotteryDrawnBar"></div>
+      </div>
     </div>
 
     <!-- ===== 賞品分級：一列三個。要放商品圖就把 product-photo 裡的 svg 換成 <img src="images/xxx.jpg" alt="說明"> ===== -->
     <div class="product-grid">
-      <div class="gift-card product-card" data-key="lottery-s" data-stock="true" data-soldout-text="已抽走" data-hide-count="true">
+      <div class="gift-card product-card top-prize" data-key="lottery-s" data-stock="true" data-soldout-text="已抽走" data-hide-count="true">
+        <span class="crown-icon">👑</span>
         <div class="product-photo">
           <img src="images/09f503df-cf3b-4efd-a854-3281a55dda82.png" alt="S賞 ARIRANG 泰亨封面 黑膠">
         </div>
