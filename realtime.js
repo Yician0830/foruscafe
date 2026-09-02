@@ -15,18 +15,34 @@ function applyGiftBadges(map){
     const key = el.getAttribute('data-key');
     const status = map ? map[key] : undefined;
     const normal = el.getAttribute('data-normal') || '';
+    const useStamp = el.hasAttribute('data-stamp');
+
     let badge = el.querySelector('.status-badge');
     if(!badge){
       badge = document.createElement('span');
       badge.className = 'status-badge';
       el.appendChild(badge);
     }
+    if(useStamp) badge.style.display = 'none';
+
+    let stamp = el.querySelector('.status-stamp');
+
     if(status && status !== normal){
       el.classList.add('is-alert');
-      badge.textContent = status;
+      if(useStamp){
+        if(!stamp){
+          stamp = document.createElement('span');
+          stamp.className = 'status-stamp';
+          el.appendChild(stamp);
+        }
+        stamp.textContent = status;
+      } else {
+        badge.textContent = status;
+      }
     } else {
       el.classList.remove('is-alert');
       badge.textContent = '';
+      if(stamp) stamp.remove();
     }
   });
 }
