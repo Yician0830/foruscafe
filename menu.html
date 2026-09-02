@@ -16,10 +16,16 @@
     color:var(--navy-deep); margin:0 0 18px; padding-bottom:10px; border-bottom:1px solid var(--line);
   }
   .menu-item{
-    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
     padding:14px 0; border-bottom:1px dashed var(--line);
   }
   .menu-item:last-child{ border-bottom:none; }
+  .menu-item .mi-photo{
+    width:56px; height:56px; flex:0 0 auto; border-radius:12px; overflow:hidden;
+    background:var(--card-tint); display:flex; align-items:center; justify-content:center;
+  }
+  .menu-item .mi-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .menu-item .mi-photo svg{ width:24px; height:24px; stroke:var(--accent); }
   .menu-item .mi-left{ flex:1; }
   .menu-item .mi-name{ font-size:14.5px; font-weight:500; color:var(--navy-deep); }
   .menu-item .mi-desc{ font-size:12px; color:var(--blue-mid); margin-top:4px; line-height:1.6; }
@@ -64,11 +70,14 @@
   <div class="container">
 
     <section style="padding-top:20px;">
-<!-- ===== 甜點：複製 .menu-item 貼上即可增加品項 ===== -->
+<!-- ===== 甜點：複製 .menu-item 貼上即可增加品項，把 <svg> 換成 <img src="images/xxx.jpg"> 即可放上實際照片 ===== -->
     <div class="menu-category">
       <h3>甜點 Dessert （附贈Q版造型插卡）</h3>
 
       <div class="menu-item">
+        <div class="mi-photo">
+          <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+        </div>
         <div class="mi-left">
           <div class="mi-name">我泰想檸了</div>
           <div class="mi-desc">酸得要命檸檬塔</div>
@@ -77,6 +86,9 @@
       </div>
 
       <div class="menu-item">
+        <div class="mi-photo">
+          <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+        </div>
         <div class="mi-left">
           <div class="mi-name">巴著你不走</div>
           <div class="mi-desc">巴斯克乳酪蛋糕</div>
@@ -85,11 +97,14 @@
       </div>
     </div>
 
-    <!-- ===== 飲品：複製 .menu-item 貼上即可增加品項 ===== -->
+    <!-- ===== 飲品：複製 .menu-item 貼上即可增加品項，把 <svg> 換成 <img src="images/xxx.jpg"> 即可放上實際照片 ===== -->
     <div class="menu-category">
       <h3>飲品 Drinks（專屬杯貼）</h3>
 
       <div class="menu-item">
+        <div class="mi-photo">
+          <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+        </div>
         <div class="mi-left">
           <div class="mi-name">泰桃人喜歡</div>
           <div class="mi-desc">蜜桃冰茶</div>
@@ -98,6 +113,9 @@
       </div>
 
       <div class="menu-item">
+        <div class="mi-photo">
+          <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+        </div>
         <div class="mi-left">
           <div class="mi-name">心動冒泡中</div>
           <div class="mi-desc">檸檬氣泡飲(無糖)</div>
@@ -106,6 +124,9 @@
       </div>
 
       <div class="menu-item">
+        <div class="mi-photo">
+          <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+        </div>
         <div class="mi-left">
           <div class="mi-name">泰想見到你</div>
           <div class="mi-desc">可爾必思</div>
