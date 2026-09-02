@@ -133,6 +133,26 @@ function applyLotteryProgress(map){
   barEl.style.width = safe + '%';
 }
 
+// 集章活動關卡三「今日提示」文字：從後台 stamp-c-hint 讀取，套進翻卡背面跟詳細介紹卡
+function applyStampHint(map){
+  const text = map ? (map['stamp-c-hint'] || '') : '';
+  const pairs = [
+    ['stampHintFront', 'stampHintFrontText'],
+    ['stampHintDetail', 'stampHintDetailText']
+  ];
+  pairs.forEach(function(pair){
+    const wrap = document.getElementById(pair[0]);
+    const textEl = document.getElementById(pair[1]);
+    if(!wrap || !textEl) return;
+    if(text){
+      textEl.textContent = text;
+      wrap.style.display = '';
+    } else {
+      wrap.style.display = 'none';
+    }
+  });
+}
+
 function subscribeStatus(){
   const db = firebase.firestore();
   const stampEl = document.getElementById('statusUpdated');
@@ -149,6 +169,7 @@ function subscribeStatus(){
     applyStockBadges(map);
     applyQueueDisplay(map);
     applyLotteryProgress(map);
+    applyStampHint(map);
     if(stampEl){
       const now = new Date();
       stampEl.textContent = '即時連線中・最後同步 ' + now.toLocaleTimeString('zh-TW', { hour12:false });
@@ -159,6 +180,6 @@ function subscribeStatus(){
   });
 }
 
-if(document.querySelector('[data-key]') || document.getElementById('queueCurrent')){
+if(document.querySelector('[data-key]') || document.getElementById('queueCurrent') || document.getElementById('stampHintFront')){
   subscribeStatus();
 }

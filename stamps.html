@@ -233,6 +233,62 @@
     padding:5px 10px;
     border-radius:999px;
   }
+
+  /* ===== 「我已蓋章」自我勾選按鈕 ===== */
+  .stamp-collect-btn{
+    margin-top:14px;
+    border:1px solid rgba(255,255,255,.5);
+    background:rgba(255,255,255,.12);
+    color:#f3f5ff;
+    font-family:'Noto Sans TC', sans-serif;
+    font-size:11px;
+    letter-spacing:1px;
+    padding:6px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .25s ease, transform .2s ease;
+  }
+  .stamp-collect-btn:hover{ background:rgba(255,255,255,.22); }
+  .stamp-collect-btn.is-active{
+    background:#fff; border-color:#fff; color:#3a4a78; font-weight:700;
+  }
+
+  /* ===== 集滿4枚後的醒目提示 ===== */
+  .prize.complete{
+    background:linear-gradient(120deg,#ffe9b8,#ffd166 55%,#ffe9b8);
+    color:#6b4a12 !important;
+    font-weight:700;
+    box-shadow:0 0 0 3px rgba(255,209,102,.45), 0 10px 22px -10px rgba(200,140,20,.65);
+    animation:prizePulse 1.6s ease-in-out infinite;
+  }
+  @keyframes prizePulse{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.035); }
+  }
+
+  /* ===== 今日提示（後台可更新文字） ===== */
+  .stamp-hint{
+    margin-top:10px;
+    font-size:11.5px;
+    line-height:1.6;
+    padding:6px 10px;
+    border-radius:8px;
+    background:rgba(255,255,255,.14);
+    color:#eef1ff;
+  }
+  .stamp-hint b{ color:#ffe1a0; }
+  .detail-hint{
+    display:block;
+    margin-top:8px;
+    font-size:12px;
+    line-height:1.6;
+    color:#8a5a1f;
+    background:#fff4e8;
+    border:1px solid #f0c98f;
+    border-radius:8px;
+    padding:6px 10px;
+  }
+  .detail-hint b{ color:#7a3f0a; }
 </style>
 </head>
 <body>
@@ -308,6 +364,7 @@
             <div class="stamp-face stamp-back">
   <div class="back-title">關卡一</div>
   <p>消費應援套餐後，憑收據找工作人員領取應援物與蓋章</p>
+  <button class="stamp-collect-btn" type="button" data-letter="A">我已蓋章 ✓</button>
   <div class="back-hint">再次點擊翻回正面</div>
 </div>
           </div>
@@ -323,6 +380,7 @@
             <div class="stamp-face stamp-back">
               <div class="back-title">關卡二</div>
               <p>拍攝活動現場發布至社群平台上，憑打卡畫面找工作人員</p>
+              <button class="stamp-collect-btn" type="button" data-letter="B">我已蓋章 ✓</button>
               <div class="back-hint">再次點擊翻回正面</div>
             </div>
           </div>
@@ -338,6 +396,8 @@
             <div class="stamp-face stamp-back">
               <div class="back-title">關卡三</div>
               <p>咖啡廳內藏有7隻出道小胖彈，全部找出後可以蓋章（每天站位皆會不同）</p>
+              <div class="stamp-hint" id="stampHintFront" style="display:none;">💡 <b>今日提示</b>：<span id="stampHintFrontText"></span></div>
+              <button class="stamp-collect-btn" type="button" data-letter="C">我已蓋章 ✓</button>
               <div class="back-hint">再次點擊翻回正面</div>
             </div>
           </div>
@@ -353,6 +413,7 @@
             <div class="stamp-face stamp-back">
               <div class="back-title">關卡四</div>
               <p>完成特別小活動任1項，即可找工作人員兌換獎章</p>
+              <button class="stamp-collect-btn" type="button" data-letter="D">我已蓋章 ✓</button>
               <div class="back-hint">再次點擊翻回正面</div>
             </div>
           </div>
@@ -373,7 +434,7 @@
     </div>
 
     <div class="detail-grid">
-      <div class="detail-card">
+      <div class="detail-card" data-letter="A">
         <div class="detail-badge">A</div>
         <div class="detail-body">
           <h3>關卡一・應援套餐</h3>
@@ -382,7 +443,7 @@
         </div>
       </div>
 
-      <div class="detail-card">
+      <div class="detail-card" data-letter="B">
         <div class="detail-badge">B</div>
         <div class="detail-body">
           <h3>關卡二・社群打卡</h3>
@@ -391,16 +452,17 @@
         </div>
       </div>
 
-      <div class="detail-card">
+      <div class="detail-card" data-letter="C">
         <div class="detail-badge">C</div>
         <div class="detail-body">
           <h3>關卡三・尋找小胖彈</h3>
           <p>咖啡廳裡悄悄藏了 7 隻出道造型的小胖彈，散落在店內各個角落，而且每天躲藏的位置都不太一樣。仔細找找看，把全部 7 隻都找出來後，就能向工作人員兌換第三枚印章。</p>
           <span class="detail-tip">🔍 位置每日更換</span>
+          <span class="detail-hint" id="stampHintDetail" style="display:none;">💡 <b>今日提示</b>：<span id="stampHintDetailText"></span></span>
         </div>
       </div>
 
-      <div class="detail-card">
+      <div class="detail-card" data-letter="D">
         <div class="detail-badge">D</div>
         <div class="detail-body">
           <h3>關卡四・特別小活動</h3>
@@ -421,13 +483,69 @@
   </div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 <script src="script.js"></script>
+<script src="realtime.js"></script>
 <script>
+  var STAMP_STORAGE_KEY = 'forus_stamp_collected';
+
+  function getCollected(){
+    try{
+      var raw = localStorage.getItem(STAMP_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){ return []; }
+  }
+  function setCollected(arr){
+    try{ localStorage.setItem(STAMP_STORAGE_KEY, JSON.stringify(arr)); }catch(e){}
+  }
+
+  function refreshCollectedUI(){
+    var collected = getCollected();
+    document.querySelectorAll('.stamp-card').forEach(function(card){
+      var letter = card.getAttribute('data-letter');
+      var isCollected = collected.indexOf(letter) !== -1;
+      card.classList.toggle('collected', isCollected);
+      var btn = card.querySelector('.stamp-collect-btn');
+      if(btn){
+        btn.classList.toggle('is-active', isCollected);
+        btn.textContent = isCollected ? '已蓋章 ✓' : '我已蓋章 ✓';
+      }
+    });
+    var prizeEl = document.querySelector('.prize');
+    if(prizeEl) prizeEl.classList.toggle('complete', collected.length >= 4);
+  }
+
+  document.querySelectorAll('.stamp-collect-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation(); // 避免同時觸發卡片翻面
+      var letter = btn.getAttribute('data-letter');
+      var collected = getCollected();
+      var idx = collected.indexOf(letter);
+      if(idx === -1){ collected.push(letter); } else { collected.splice(idx, 1); }
+      setCollected(collected);
+      refreshCollectedUI();
+    });
+  });
+
   document.querySelectorAll('.stamp-card').forEach(function(card){
     card.addEventListener('click', function(){
       card.classList.toggle('is-flipped');
+      // 翻到正面看任務內容時，順便捲動到下方對應的關卡詳細介紹
+      if(card.classList.contains('is-flipped')){
+        var letter = card.getAttribute('data-letter');
+        var detail = document.querySelector('.detail-card[data-letter="' + letter + '"]');
+        if(detail){
+          setTimeout(function(){
+            detail.scrollIntoView({ behavior:'smooth', block:'center' });
+          }, 350);
+        }
+      }
     });
   });
+
+  refreshCollectedUI();
 </script>
 </body>
 </html>

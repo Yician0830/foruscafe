@@ -29,6 +29,7 @@ const ITEMS = [
   { key: 'merch-4',   label: 'Q版吊飾組/單購',           type: 'stock' },
   { key: 'merch-5',   label: 'Q版造型磁鐵',              type: 'stock' },
   { key: 'merch-6',   label: '磁吸卡套',                 type: 'stock' },
+  { key: 'stamp-c-hint', label: '關卡三・小胖彈今日提示文字', type: 'text' },
 ];
 const PRESETS = {
   gift: ['供應中', '已發完'],
@@ -48,6 +49,7 @@ const slotGroup = document.getElementById('slotGroup');
 const queueGroup = document.getElementById('queueGroup');
 const lotteryGroup = document.getElementById('lotteryGroup');
 const merchGroup = document.getElementById('merchGroup');
+const stampGroup = document.getElementById('stampGroup');
 
 auth.onAuthStateChanged(function(user){
   if(user){
@@ -107,6 +109,38 @@ function buildRow(item){
   const savedFlag = document.createElement('span');
   savedFlag.className = 'saved-flag';
   savedFlag.textContent = '已儲存 ✓';
+
+  if(item.type === 'text'){
+    const textInput = document.createElement('input');
+    textInput.type = 'text';
+    textInput.placeholder = '輸入提示文字（留空即隱藏）';
+    textInput.style.width = '220px';
+    row.appendChild(textInput);
+    textInput.addEventListener('input', function(){ row.dataset.dirty = 'true'; });
+
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'save-btn';
+    saveBtn.textContent = '更新';
+    row.appendChild(saveBtn);
+    row.appendChild(savedFlag);
+
+    row._getValue = function(){ return textInput.value.trim(); };
+    row._afterSave = function(){ row.dataset.dirty = 'false'; };
+
+    saveBtn.addEventListener('click', function(){
+      const value = row._getValue();
+      saveBtn.disabled = true;
+      saveOne(item, value, savedFlag).then(function(){
+        saveBtn.disabled = false;
+        row._afterSave();
+      }).catch(function(err){
+        saveBtn.disabled = false;
+        alert('儲存失敗：' + err.message);
+      });
+    });
+
+    return row;
+  }
 
   if(item.type === 'stock'){
     const numInput = document.createElement('input');
@@ -213,6 +247,9 @@ function renderGroups(){
   });
   ITEMS.filter(function(i){ return i.key.startsWith('merch-'); }).forEach(function(item){
     merchGroup.appendChild(buildRow(item));
+  });
+  ITEMS.filter(function(i){ return i.key.startsWith('stamp-'); }).forEach(function(item){
+    stampGroup.appendChild(buildRow(item));
   });
 }
 
