@@ -32,6 +32,29 @@
     box-shadow:0 14px 30px -16px rgba(28,51,80,.55);
   }
   .reserve-btn.is-open:hover{ transform:translateY(-3px); }
+
+  /* ===== 常見問題 FAQ ===== */
+  .faq-list{ margin-top:8px; }
+  .faq-item{ border-bottom:1px dashed var(--line); }
+  .faq-item:last-child{ border-bottom:none; }
+  .faq-q{
+    width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px;
+    padding:18px 4px; background:none; border:none; cursor:pointer; font:inherit; text-align:left;
+  }
+  .faq-q b{
+    font-family:'Zen Maru Gothic','Noto Sans TC',sans-serif; font-weight:500;
+    font-size:14.5px; color:var(--navy-deep);
+  }
+  .faq-icon{
+    flex:0 0 auto; font-size:18px; color:var(--blue-mid); line-height:1;
+    transition:transform .25s ease;
+  }
+  .faq-item.open .faq-icon{ transform:rotate(45deg); }
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .35s ease;
+    font-size:13px; color:var(--blue-mid); line-height:1.8; padding:0 4px;
+  }
+  .faq-item.open .faq-a{ max-height:240px; padding-bottom:16px; }
 </style>
 </head>
 <body>
@@ -65,6 +88,12 @@
 <section style="padding:10px 0 20px;">
   <div class="container">
     <div class="reserve-cta">
+      <div class="countdown" id="reserveCountdown" style="justify-content:center; margin-bottom:22px;">
+        <div class="box"><div class="num" id="cdDays">00</div><div class="lbl">Days</div></div>
+        <div class="box"><div class="num" id="cdHours">00</div><div class="lbl">Hours</div></div>
+        <div class="box"><div class="num" id="cdMins">00</div><div class="lbl">Min</div></div>
+        <div class="box"><div class="num" id="cdSecs">00</div><div class="lbl">Sec</div></div>
+      </div>
       <a href="#" id="reserveBtn" class="reserve-btn is-locked" aria-disabled="true" target="_blank" rel="noopener">
         <span class="reserve-btn-label">立即預約</span>
         <span class="reserve-btn-sub" id="reserveSub">開放時間讀取中…</span>
@@ -137,6 +166,70 @@
   </div>
 </section>
 
+<div class="divider"><span>✦</span><span>✦</span><span>✦</span></div>
+
+<section style="padding:10px 0 40px;">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2>常見問題</h2>
+      <p class="desc">入場前先看看這些，現場排隊或預約都會更順利</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">
+          <b>可以請朋友代為排隊或代領號碼牌嗎？</b>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>不行，每筆預約與號碼牌僅限本人領取，需要本人出示預約完成畫面，代排、代領恕無法入場，請大家見諒。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <b>預約後可以更改時段嗎？</b>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>目前系統不支援線上直接改時段，如需異動請先取消原本的預約，再重新預約其他還有開放名額的時段。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <b>臨時不能來，一定要取消預約嗎？</b>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>請務必提前取消，把名額釋出給其他還在候補的 ARMY，也麻煩大家互相體諒，一起讓大家都有機會入場。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <b>現場排隊需要先消費才能上樓嗎？</b>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>現場排隊採號碼牌制，入場前需完成低消才能上樓參觀，低消內容與品項可以參考「應援菜單」頁面。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">
+          <b>開放預約的連結會公佈在哪裡？</b>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p>不用另外找連結，時間一到本頁面上方的「立即預約」按鈕會自動解鎖，直接點擊就會導向預約頁面，記得鎖定這一頁就不會錯過。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="container">
     <img src="images/logo.png" alt="For Us" class="footer-logo">
@@ -160,18 +253,26 @@
 
   var btn = document.getElementById('reserveBtn');
   var sub = document.getElementById('reserveSub');
+  var cd = document.getElementById('reserveCountdown');
+  var cdDays = document.getElementById('cdDays');
+  var cdHours = document.getElementById('cdHours');
+  var cdMins = document.getElementById('cdMins');
+  var cdSecs = document.getElementById('cdSecs');
   if(!btn) return;
 
   function pad(n){ return n < 10 ? '0' + n : '' + n; }
 
   function render(){
     var now = Date.now();
-    if(now >= OPEN_AT){
+    var diff = OPEN_AT - now;
+
+    if(diff <= 0){
       btn.classList.remove('is-locked');
       btn.classList.add('is-open');
       btn.href = BOOKING_URL;
       btn.removeAttribute('aria-disabled');
       sub.textContent = '點我前往預約 →';
+      if(cd) cd.style.display = 'none';
     } else {
       var d = new Date(OPEN_AT);
       var text = d.getFullYear() + '.' + pad(d.getMonth() + 1) + '.' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ' 開放預約';
@@ -180,13 +281,32 @@
       btn.removeAttribute('href');
       btn.setAttribute('aria-disabled', 'true');
       sub.textContent = text;
+
+      if(cd){
+        cd.style.display = 'flex';
+        var totalSec = Math.floor(diff / 1000);
+        var days = Math.floor(totalSec / 86400);
+        var hours = Math.floor((totalSec % 86400) / 3600);
+        var mins = Math.floor((totalSec % 3600) / 60);
+        var secs = totalSec % 60;
+        cdDays.textContent = pad(days);
+        cdHours.textContent = pad(hours);
+        cdMins.textContent = pad(mins);
+        cdSecs.textContent = pad(secs);
+      }
     }
   }
 
   render();
-  // 每 30 秒重新檢查一次，時間到會自動解鎖，不用重新整理頁面
-  setInterval(render, 30000);
+  // 每秒更新一次，倒數會即時跳動；時間到會自動解鎖，不用重新整理頁面
+  setInterval(render, 1000);
 })();
+
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click', function(){
+    q.parentElement.classList.toggle('open');
+  });
+});
 </script>
 </body>
 </html>
