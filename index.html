@@ -2,6 +2,11 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
+  <script>
+  if(!sessionStorage.getItem('forus_intro_seen')){
+    window.location.replace('intro.html');
+  }
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Us — 金泰亨 演唱會應援咖啡廳</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
