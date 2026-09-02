@@ -57,12 +57,35 @@
   .decor-credit-group.open .decor-credit-arrow{ transform:rotate(180deg); }
   .decor-credit-group.open .decor-credit-header{ border-color:var(--navy-deep); }
 
-  .decor-credit-content{
-    display:none; padding:18px 4px 6px;
-  }
-  .decor-credit-group.open .decor-credit-content{ display:block; }
+  .decor-credit-content{ display:none; }
 
   .decor-photo.has-img{ cursor:zoom-in; }
+
+  .decor-gallery-modal{
+    display:none; position:fixed; inset:0; z-index:998;
+    background:rgba(15,20,35,.82);
+    align-items:center; justify-content:center;
+    padding:40px 20px;
+  }
+  .decor-gallery-modal.open{ display:flex; }
+  .decor-gallery-box{
+    position:relative; width:100%; max-width:760px; max-height:82vh;
+    background:var(--card); border-radius:18px; padding:26px 24px 24px;
+    overflow-y:auto;
+  }
+  .decor-gallery-title{
+    font-family:'Zen Maru Gothic','Noto Sans TC', sans-serif; font-size:16px; font-weight:500;
+    color:var(--navy-deep); margin:0 0 18px; padding-right:30px;
+  }
+  .decor-gallery-close{
+    position:absolute; top:16px; right:16px;
+    width:34px; height:34px; border-radius:50%;
+    background:var(--card-tint); color:var(--navy-deep);
+    border:none; font-size:16px; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s ease;
+  }
+  .decor-gallery-close:hover{ background:var(--line); }
 
   .decor-lightbox{
     display:none; position:fixed; inset:0; z-index:999;
@@ -346,6 +369,14 @@
   </div>
 </section>
 
+<div class="decor-gallery-modal" id="decorGalleryModal">
+  <div class="decor-gallery-box">
+    <button class="decor-gallery-close" id="decorGalleryClose" aria-label="關閉">✕</button>
+    <div class="decor-gallery-title" id="decorGalleryTitle"></div>
+    <div class="decor-photo-grid" id="decorGalleryGrid"></div>
+  </div>
+</div>
+
 <div class="decor-lightbox" id="decorLightbox">
   <button class="decor-lightbox-close" id="decorLightboxClose" aria-label="關閉">✕</button>
   <img src="" alt="" id="decorLightboxImg">
@@ -371,34 +402,56 @@
     });
   });
 
+  var galleryModal = document.getElementById('decorGalleryModal');
+  var galleryTitle = document.getElementById('decorGalleryTitle');
+  var galleryGrid = document.getElementById('decorGalleryGrid');
+  var galleryClose = document.getElementById('decorGalleryClose');
+
   document.querySelectorAll('.decor-credit-header').forEach(function(header){
     header.addEventListener('click', function(){
-      header.parentElement.classList.toggle('open');
+      var name = header.querySelector('.decor-credit-name').textContent;
+      var contentId = header.getAttribute('data-target');
+      var content = document.getElementById(contentId);
+      galleryTitle.textContent = name;
+      galleryGrid.innerHTML = content.querySelector('.decor-photo-grid').innerHTML;
+      galleryModal.classList.add('open');
     });
+  });
+
+  function closeGallery(){ galleryModal.classList.remove('open'); }
+  galleryClose.addEventListener('click', closeGallery);
+  galleryModal.addEventListener('click', function(e){
+    if(e.target === galleryModal) closeGallery();
   });
 
   var lightbox = document.getElementById('decorLightbox');
   var lightboxImg = document.getElementById('decorLightboxImg');
   var lightboxClose = document.getElementById('decorLightboxClose');
 
-  document.querySelectorAll('.decor-photo').forEach(function(photo){
+  document.querySelectorAll('#tab-frame .decor-photo, #tab-chibi .decor-photo').forEach(function(photo){
+    if(photo.querySelector('img')) photo.classList.add('has-img');
+  });
+
+  function openLightboxFrom(img){
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('open');
+  }
+
+  document.addEventListener('click', function(e){
+    var photo = e.target.closest('.decor-photo.has-img');
+    if(!photo) return;
     var img = photo.querySelector('img');
-    if(!img) return;
-    photo.classList.add('has-img');
-    photo.addEventListener('click', function(){
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.classList.add('open');
-    });
+    if(img) openLightboxFrom(img);
   });
 
   function closeLightbox(){ lightbox.classList.remove('open'); lightboxImg.src = ''; }
-  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxClose.addEventListener('click', function(e){ e.stopPropagation(); closeLightbox(); });
   lightbox.addEventListener('click', function(e){
     if(e.target === lightbox) closeLightbox();
   });
   document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'Escape'){ closeLightbox(); closeGallery(); }
   });
 </script>
 </body>
