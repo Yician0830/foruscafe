@@ -2,6 +2,7 @@ const ITEMS = [
   { key: 'poster',    label: 'A5海報',        type: 'gift' },
   { key: 'ribbon',    label: '絲帶手環',       type: 'gift' },
   { key: 'ticket',    label: '主題票卡',       type: 'gift' },
+  { key: 'ticket-holder', label: '主題票夾（前100名預約贈品）', type: 'gift' },
   { key: 'bag',       label: '手提紙袋',       type: 'gift' },
   { key: 'tearfilm',  label: '撕拉片',         type: 'gift' },
   { key: 'slot-1000', label: '10:00–10:50',   type: 'slot' },
