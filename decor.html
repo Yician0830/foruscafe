@@ -32,12 +32,35 @@
   .decor-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
   .decor-photo svg{ width:36px; height:36px; stroke:var(--accent); }
 
-  .decor-credit-group{ margin-bottom:32px; }
+  .decor-credit-group{ margin-bottom:14px; }
   .decor-credit-group:last-child{ margin-bottom:0; }
   .decor-credit-name{
-    font-family:'Zen Maru Gothic','Noto Sans TC', sans-serif; font-size:13px; font-weight:500;
-    letter-spacing:1px; color:var(--navy-deep); margin:0 0 12px; padding-left:2px;
+    font-family:'Zen Maru Gothic','Noto Sans TC', sans-serif; font-size:14px; font-weight:500;
+    letter-spacing:1px; color:var(--navy-deep); flex:1; text-align:left;
   }
+
+  .decor-credit-header{
+    width:100%; display:flex; align-items:center; gap:14px;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:10px 16px; cursor:pointer; transition:.25s ease; font:inherit;
+  }
+  .decor-credit-header:hover{ border-color:var(--navy-deep); }
+  .decor-credit-cover{
+    width:48px; height:48px; flex:0 0 auto; border-radius:10px; overflow:hidden;
+    background:var(--card-tint); display:flex; align-items:center; justify-content:center;
+  }
+  .decor-credit-cover img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .decor-credit-cover svg{ width:24px; height:24px; stroke:var(--accent); }
+  .decor-credit-arrow{
+    flex:0 0 auto; font-size:13px; color:var(--blue-mid); transition:transform .25s ease;
+  }
+  .decor-credit-group.open .decor-credit-arrow{ transform:rotate(180deg); }
+  .decor-credit-group.open .decor-credit-header{ border-color:var(--navy-deep); }
+
+  .decor-credit-content{
+    display:none; padding:18px 4px 6px;
+  }
+  .decor-credit-group.open .decor-credit-content{ display:block; }
 
   @media (max-width:640px){
     .decor-photo-grid{ grid-template-columns:repeat(2,1fr); }
@@ -137,74 +160,115 @@
         <button class="decor-tab-btn" data-tab="banner">掛布、簽名板</button>
       </div>
 
-      <!-- ===== 無框畫展示：依提供帳號分區塊，複製 .decor-credit-group 貼上即可增加帳號 ===== -->
+      <!-- ===== 無框畫展示：點帳號卡片才展開作品，複製整個 .decor-credit-group 貼上即可增加帳號 ===== -->
       <div class="decor-tab-panel active" id="tab-frame">
 
         <div class="decor-credit-group">
-          <div class="decor-credit-name">@STARLINE.</div>
-          <div class="decor-photo-grid">
-            <div class="decor-photo">
+          <button class="decor-credit-header" data-target="group-starline">
+            <div class="decor-credit-cover">
+              <!-- 封面圖：換成這個帳號的代表照，跟裡面展出的作品可以不一樣 -->
               <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
             </div>
-            <div class="decor-photo">
-              <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
-            </div>
-            <div class="decor-photo">
-              <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+            <div class="decor-credit-name">@STARLINE.</div>
+            <span class="decor-credit-arrow">▾</span>
+          </button>
+          <div class="decor-credit-content" id="group-starline">
+            <div class="decor-photo-grid">
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="decor-credit-group">
-          <div class="decor-credit-name">@6thNORTH_V</div>
-          <div class="decor-photo-grid">
-            <div class="decor-photo">
-              <img src="images/decor/IMG_3928.JPG>
+          <button class="decor-credit-header" data-target="group-6thnorth">
+            <div class="decor-credit-cover">
+              <img src="images/decor/covers/6thnorth-cover.jpg" alt="@6thNORTH_V 封面">
             </div>
-            <div class="decor-photo">
-              <img src="images/decor/IMG_3929.JPG>
-            </div>
-          </div>
-        </div>
-
-        <div class="decor-credit-group">
-          <div class="decor-credit-name">@MONOSEAGUL</div>
-          <div class="decor-photo-grid">
-            <div class="decor-photo">
-              <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
-            </div>
-            <div class="decor-photo">
-              <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
-            </div>
-            <div class="decor-photo">
-              <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+            <div class="decor-credit-name">@6thNORTH_V</div>
+            <span class="decor-credit-arrow">▾</span>
+          </button>
+          <div class="decor-credit-content" id="group-6thnorth">
+            <div class="decor-photo-grid">
+              <div class="decor-photo">
+                <img src="images/decor/IMG_3928.JPG" alt="@6thNORTH_V 作品 1">
+              </div>
+              <div class="decor-photo">
+                <img src="images/decor/IMG_3929.JPG" alt="@6thNORTH_V 作品 2">
+              </div>
             </div>
           </div>
         </div>
 
         <div class="decor-credit-group">
-          <div class="decor-credit-name">@VEYOUTH（兩張未公開照片）</div>
-          <div class="decor-photo-grid">
-            <div class="decor-photo">
+          <button class="decor-credit-header" data-target="group-monoseagul">
+            <div class="decor-credit-cover">
               <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
             </div>
-            <div class="decor-photo">
-              <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+            <div class="decor-credit-name">@MONOSEAGUL</div>
+            <span class="decor-credit-arrow">▾</span>
+          </button>
+          <div class="decor-credit-content" id="group-monoseagul">
+            <div class="decor-photo-grid">
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="decor-credit-group">
-          <div class="decor-credit-name">@VOL.95</div>
-          <div class="decor-photo-grid">
-            <div class="decor-photo">
+          <button class="decor-credit-header" data-target="group-veyouth">
+            <div class="decor-credit-cover">
               <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
             </div>
-            <div class="decor-photo">
+            <div class="decor-credit-name">@VEYOUTH（兩張未公開照片）</div>
+            <span class="decor-credit-arrow">▾</span>
+          </button>
+          <div class="decor-credit-content" id="group-veyouth">
+            <div class="decor-photo-grid">
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="decor-credit-group">
+          <button class="decor-credit-header" data-target="group-vol95">
+            <div class="decor-credit-cover">
               <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
             </div>
-            <div class="decor-photo">
-              <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+            <div class="decor-credit-name">@VOL.95</div>
+            <span class="decor-credit-arrow">▾</span>
+          </button>
+          <div class="decor-credit-content" id="group-vol95">
+            <div class="decor-photo-grid">
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
+              <div class="decor-photo">
+                <svg viewBox="0 0 48 48" fill="none" stroke-width="1.3"><rect x="6" y="10" width="36" height="28" rx="3"/><circle cx="18" cy="20" r="3"/><path d="M10 34 L20 24 L28 30 L34 22 L40 34"/></svg>
+              </div>
             </div>
           </div>
         </div>
@@ -276,6 +340,12 @@
       document.querySelectorAll('.decor-tab-panel').forEach(function(p){ p.classList.remove('active'); });
       btn.classList.add('active');
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  document.querySelectorAll('.decor-credit-header').forEach(function(header){
+    header.addEventListener('click', function(){
+      header.parentElement.classList.toggle('open');
     });
   });
 </script>
