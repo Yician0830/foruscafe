@@ -8,7 +8,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-</head>
+<style>
+  /* ===== 價格標籤 ===== */
+  .product-info .mc-price{
+    display:block; margin:4px 0 6px; font-size:16px; font-weight:600;
+    color:var(--navy); font-family:'Cormorant Garamond','Zen Maru Gothic', serif;
+  }
+  .product-info p{ margin:0; }
+
+  /* ===== 開放預購徽章 ===== */
+  .preorder-badge{
+    position:absolute; top:10px; left:10px; z-index:2;
+    background:#5a76c8; color:#fff; font-size:11px; letter-spacing:.5px;
+    padding:4px 10px; border-radius:999px;
+    box-shadow:0 2px 6px rgba(0,0,0,.18);
+  }
+</style></head>
 <body>
 
 <header class="site-nav">
@@ -49,39 +64,47 @@
     <!-- ===== 商品清單：一列三個。要放商品圖就把 product-photo 裡的 svg 換成 <img src="images/xxx.jpg" alt="說明"> ===== -->
     <div class="product-grid">
       <div class="gift-card product-card" data-key="merch-1" data-stock="true" data-soldout-text="已售完">
+        <span class="preorder-badge">開放預購</span>
         <div class="product-photo">
           <img src="images/80dfecb65m0d3d855fb0ff4fae53c37a.png" alt="60*30 閃粉手幅">
         </div>
         <div class="product-info">
           <h4>60*30 閃粉手幅(少量)</h4>
-          <p>NT$480・售完為止/開放預購，預計12月中-底才會出貨</p>
+          <span class="mc-price">NT$480</span>
+          <p>售完為止・預計12月中-底才會出貨</p>
         </div>
       </div>
       <div class="gift-card product-card" data-key="merch-2" data-stock="true" data-soldout-text="已售完">
+        <span class="preorder-badge">開放預購</span>
         <div class="product-photo">
          <img src="images/80dfecb65m0d3d855fb0ff4fae53c37a.png" alt="迷你小手幅">
         </div>
         <div class="product-info">
           <h4>迷你小手幅(少量)</h4>
-          <p>NT$230・售完為止/開放預購，預計12月中-底才會出貨</p>
+          <span class="mc-price">NT$230</span>
+          <p>售完為止・預計12月中-底才會出貨</p>
         </div>
       </div>
       <div class="gift-card product-card" data-key="merch-3" data-stock="true" data-soldout-text="已售完">
+        <span class="preorder-badge">開放預購</span>
         <div class="product-photo">
          <img src="images/215c16af4gc42d30765791eb2f892e4f.png" alt="迷你愛心扇">
         </div>
         <div class="product-info">
           <h4>迷你愛心扇(少量)</h4>
-          <p>NT$80・售完為止/開放預購，預計12月中-底才會出貨</p>
+          <span class="mc-price">NT$80</span>
+          <p>售完為止・預計12月中-底才會出貨</p>
         </div>
       </div>
       <div class="gift-card product-card" data-key="merch-4" data-stock="true" data-soldout-text="已售完">
+        <span class="preorder-badge">開放預購</span>
         <div class="product-photo">
           <img src="images/IMG_0076.jpeg" alt="Q版吊飾組">
         </div>
         <div class="product-info">
           <h4>Q版吊飾組(一組10款另有盲盒包裝)/單購</h4>
-          <p>吊飾組NT$250、單款NT$30・售完為止/開放預購，預計12月中-底才會出貨</p>
+          <span class="mc-price">NT$250（一組）／NT$30（單款）</span>
+          <p>售完為止・預計12月中-底才會出貨</p>
         </div>
       </div>
       <div class="gift-card product-card" data-key="merch-5" data-stock="true" data-soldout-text="已售完">
@@ -90,7 +113,8 @@
         </div>
         <div class="product-info">
           <h4>Q版造型磁鐵(組)</h4>
-          <p>NT$100・售完為止</p>
+          <span class="mc-price">NT$100</span>
+          <p>售完為止</p>
         </div>
       </div>
       <div class="gift-card product-card" data-key="merch-6" data-stock="true" data-soldout-text="已售完">
@@ -99,7 +123,8 @@
         </div>
         <div class="product-info">
           <h4>磁吸卡套</h4>
-          <p>NT$150・售完為止</p>
+          <span class="mc-price">NT$150</span>
+          <p>售完為止</p>
         </div>
       </div>
     </div>
