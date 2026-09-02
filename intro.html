@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Us — Tae Hyung Cafe Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html,body{
+    margin:0; height:100%; overflow:hidden; background:#dce9f5;
+    font-family:'Noto Sans TC', sans-serif;
+  }
+
+  .intro-wrap{ position:relative; width:100%; height:100vh; overflow:hidden; }
+
+  .scene{
+    position:absolute; top:0; left:0; width:100%; height:200vh;
+    transition:transform 2.4s cubic-bezier(.65,0,.35,1);
+  }
+  .scene.pan{ transform:translateY(-100vh); }
+
+  .sky{
+    position:relative; width:100%; height:100vh; overflow:hidden;
+    background:linear-gradient(180deg,#a9c9e8 0%,#c9dff2 55%,#eef4fa 100%);
+  }
+  .moon{
+    position:absolute; top:12%; right:14%; width:64px; height:64px; border-radius:50%;
+    background:#ffffff; box-shadow:0 0 70px 18px rgba(255,255,255,.6); opacity:.95;
+  }
+
+  .ground{
+    position:relative; width:100%; height:100vh; overflow:hidden;
+    background:linear-gradient(180deg,#eef4fa 0%,#dce9f5 30%,#ffffff 100%);
+  }
+  .hill{
+    position:absolute; bottom:0; left:-12%; width:124%; height:52%;
+    background:#fbfdff;
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .hill.back{
+    left:-20%; width:140%; height:44%; background:#eef4fa; opacity:.9;
+  }
+
+  .snow-layer{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+  .flake{
+    position:absolute; top:-10px; border-radius:50%; background:#ffffff;
+    box-shadow:0 0 3px rgba(90,120,160,.35);
+    animation:fall linear infinite;
+  }
+  @keyframes fall{ to{ transform:translateY(115vh); } }
+
+  .footprints{
+    position:absolute; bottom:10%; left:50%; transform:translateX(-50%) rotate(-4deg);
+    width:180px; height:230px;
+  }
+  .fp{
+    position:absolute; width:13px; height:20px; border-radius:50% 50% 45% 45%;
+    background:rgba(84,108,148,.4); opacity:0; transform:scale(.6);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .fp.show{ opacity:1; transform:scale(1); }
+
+  .center-content{
+    position:absolute; inset:0; z-index:4;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px;
+    pointer-events:none;
+  }
+
+  .brand{
+    font-family:'Mrs Saint Delafield', cursive; font-size:52px; color:#1c3350;
+    opacity:0; transform:translateY(14px); transition:opacity 1s ease, transform 1s ease;
+  }
+  .brand.show{ opacity:.9; transform:translateY(0); }
+  .brand-logo{ display:block; max-height:80px; width:auto; }
+
+  .enter-btn{
+    opacity:0; transform:translateY(18px); pointer-events:none;
+    transition:opacity .8s ease, transform .8s ease;
+    background:#1c3350; color:#eef4fa; border:none; text-decoration:none;
+    padding:14px 40px; border-radius:999px;
+    font-family:'Zen Maru Gothic','Noto Sans TC',sans-serif; font-size:14px; letter-spacing:2px;
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+  }
+  .enter-btn.show{ opacity:1; transform:translateY(0); pointer-events:auto; }
+  .enter-btn:hover{ transform:translateY(-3px); }
+
+  .skip-btn{
+    position:absolute; top:22px; right:24px; z-index:5;
+    background:rgba(255,255,255,.55); color:#1c3350; border:1px solid rgba(28,51,80,.25);
+    padding:8px 18px; border-radius:999px; font-size:12px; letter-spacing:1px;
+    cursor:pointer; font-family:'Noto Sans TC', sans-serif;
+  }
+  .skip-btn:hover{ background:rgba(255,255,255,.85); }
+</style>
+</head>
+<body>
+
+<div class="intro-wrap">
+  <button class="skip-btn" id="skipBtn">略過 Skip</button>
+
+  <div class="scene" id="scene">
+    <div class="sky">
+      <div class="moon"></div>
+      <div class="snow-layer" id="snowSky"></div>
+    </div>
+    <div class="ground">
+      <div class="hill back"></div>
+      <div class="hill"></div>
+      <div class="snow-layer" id="snowGround"></div>
+      <div class="footprints" id="footprints">
+        <div class="fp" style="left:64px; top:0;"></div>
+        <div class="fp" style="left:104px; top:32px; transform:rotate(8deg);"></div>
+        <div class="fp" style="left:58px; top:68px;"></div>
+        <div class="fp" style="left:100px; top:102px; transform:rotate(6deg);"></div>
+        <div class="fp" style="left:62px; top:138px;"></div>
+        <div class="fp" style="left:96px; top:172px; transform:rotate(5deg);"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="center-content">
+    <div class="brand" id="brandText"><img class="brand-logo" src="images/logo.png" alt="For Us"></div>
+    <a href="index.html" class="enter-btn" id="enterBtn">進入 For Us <span>→</span></a>
+  </div>
+</div>
+
+<script>
+  function spawnFlakes(containerId, count){
+    var c = document.getElementById(containerId);
+    for(var i = 0; i < count; i++){
+      var f = document.createElement('div');
+      f.className = 'flake';
+      var size = Math.random() * 3 + 2;
+      f.style.width = size + 'px';
+      f.style.height = size + 'px';
+      f.style.left = (Math.random() * 100) + '%';
+      f.style.animationDuration = (Math.random() * 4 + 4) + 's';
+      f.style.animationDelay = (Math.random() * 5) + 's';
+      f.style.opacity = (Math.random() * 0.5 + 0.4);
+      c.appendChild(f);
+    }
+  }
+  spawnFlakes('snowSky', 70);
+  spawnFlakes('snowGround', 45);
+
+  var scene = document.getElementById('scene');
+  var footprints = document.querySelectorAll('.fp');
+  var brandText = document.getElementById('brandText');
+  var enterBtn = document.getElementById('enterBtn');
+  var skipBtn = document.getElementById('skipBtn');
+  var timers = [];
+
+  function runSequence(startDelay){
+    timers.push(setTimeout(function(){ scene.classList.add('pan'); }, startDelay));
+
+    var afterPan = startDelay + 2500;
+    footprints.forEach(function(fp, i){
+      timers.push(setTimeout(function(){ fp.classList.add('show'); }, afterPan + i * 380));
+    });
+
+    var afterFootprints = afterPan + footprints.length * 380 + 300;
+    timers.push(setTimeout(function(){ brandText.classList.add('show'); }, afterFootprints));
+    timers.push(setTimeout(function(){ enterBtn.classList.add('show'); }, afterFootprints + 400));
+  }
+  runSequence(2000);
+
+  skipBtn.addEventListener('click', function(){
+    timers.forEach(clearTimeout);
+    scene.classList.add('pan');
+    footprints.forEach(function(fp){ fp.classList.add('show'); });
+    brandText.classList.add('show');
+    enterBtn.classList.add('show');
+    skipBtn.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>
