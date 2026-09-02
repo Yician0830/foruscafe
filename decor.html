@@ -32,30 +32,32 @@
   .decor-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
   .decor-photo svg{ width:36px; height:36px; stroke:var(--accent); }
 
-  .decor-credit-group{ margin-bottom:14px; }
-  .decor-credit-group:last-child{ margin-bottom:0; }
+  .decor-credit-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+  }
+  .decor-credit-group{ margin-bottom:0; }
   .decor-credit-name{
-    font-family:'Zen Maru Gothic','Noto Sans TC', sans-serif; font-size:14px; font-weight:500;
-    letter-spacing:1px; color:var(--navy-deep); flex:1; text-align:left;
+    font-family:'Zen Maru Gothic','Noto Sans TC', sans-serif; font-size:13px; font-weight:500;
+    letter-spacing:.5px; color:var(--navy-deep); text-align:center;
   }
 
   .decor-credit-header{
-    width:100%; display:flex; align-items:center; gap:14px;
+    width:100%; display:flex; flex-direction:column; align-items:center; gap:10px;
     background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:10px 16px; cursor:pointer; transition:.25s ease; font:inherit;
+    padding:16px 10px 14px; cursor:pointer; transition:.25s ease; font:inherit;
   }
   .decor-credit-header:hover{ border-color:var(--navy-deep); }
   .decor-credit-cover{
-    width:48px; height:48px; flex:0 0 auto; border-radius:10px; overflow:hidden;
+    width:100%; aspect-ratio:1/1; border-radius:10px; overflow:hidden;
     background:var(--card-tint); display:flex; align-items:center; justify-content:center;
   }
   .decor-credit-cover img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .decor-credit-cover svg{ width:24px; height:24px; stroke:var(--accent); }
-  .decor-credit-arrow{
-    flex:0 0 auto; font-size:13px; color:var(--blue-mid); transition:transform .25s ease;
+  .decor-credit-cover svg{ width:32px; height:32px; stroke:var(--accent); }
+  .decor-credit-arrow{ display:none; }
+
+  @media (max-width:640px){
+    .decor-credit-grid{ grid-template-columns:repeat(2,1fr); }
   }
-  .decor-credit-group.open .decor-credit-arrow{ transform:rotate(180deg); }
-  .decor-credit-group.open .decor-credit-header{ border-color:var(--navy-deep); }
 
   .decor-credit-content{ display:none; }
 
@@ -208,6 +210,7 @@
 
       <!-- ===== 無框畫展示：點帳號卡片才展開作品，複製整個 .decor-credit-group 貼上即可增加帳號 ===== -->
       <div class="decor-tab-panel active" id="tab-frame">
+      <div class="decor-credit-grid">
 
         <div class="decor-credit-group">
           <button class="decor-credit-header" data-target="group-starline">
@@ -319,6 +322,7 @@
           </div>
         </div>
 
+      </div>
       </div>
 
       <!-- ===== Q版人物立牌：複製 .decor-photo 貼上即可增加照片 ===== -->
