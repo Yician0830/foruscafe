@@ -234,16 +234,41 @@
     border-radius:999px;
   }
   .detail-subitem{
-    background:#f4f7ff;
+    position:relative;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    background:#e9eefc;
+    border:1px solid #cdd9f7;
+    border-left:4px solid #5a76c8;
     border-radius:12px;
-    padding:12px 14px;
-    margin:0 0 10px;
+    padding:14px 16px;
+    margin:0 0 14px;
+    box-shadow:0 6px 16px -10px rgba(60,80,140,.35);
   }
+  .detail-subitem.alt{
+    background:#f4ecff;
+    border-color:#dccdf7;
+    border-left-color:#8b6fd6;
+  }
+  .detail-subitem .si-icon{
+    flex:0 0 auto;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    box-shadow:0 3px 8px -4px rgba(60,80,140,.4);
+  }
+  .detail-subitem .si-body{ flex:1; }
   .detail-subitem b{
     display:block;
     font-family:'Zen Maru Gothic','Noto Sans TC', sans-serif;
-    font-size:13px;
-    color:#33415c;
+    font-size:13.5px;
+    color:#2a3860;
     margin-bottom:4px;
   }
   .detail-subitem p{
@@ -251,7 +276,14 @@
     font-family:'Noto Sans TC', sans-serif;
     font-size:12.5px;
     line-height:1.7;
-    color:#556082;
+    color:#4d5a80;
+  }
+  .detail-or{
+    text-align:center;
+    font-size:11px;
+    letter-spacing:2px;
+    color:#9aa6c8;
+    margin:-4px 0 14px;
   }
 
   /* ===== 「我已蓋章」自我勾選按鈕 ===== */
@@ -490,13 +522,21 @@
           <p>現場備有幾項特別小活動，只要任選其中一項完成，就能找工作人員兌換最後一枚獎章：</p>
 
           <div class="detail-subitem">
-            <b>🎧 TE TE說情話</b>
-            <p>咖啡廳中放有 5 台錄音機，分別錄製了泰亨於不同直播／節目上說過的中文情話。請根據錄音機上的編號，找出相對應的句子，全部配對正確就可以找工作人員蓋上專屬印章。</p>
+            <div class="si-icon">🎧</div>
+            <div class="si-body">
+              <b>TE TE說情話</b>
+              <p>咖啡廳中放有 5 台錄音機，分別錄製了泰亨於不同直播／節目上說過的中文情話。請根據錄音機上的編號，找出相對應的句子，全部配對正確就可以找工作人員蓋上專屬印章。</p>
+            </div>
           </div>
 
-          <div class="detail-subitem">
-            <b>🎤 ARMY TIME 歌曲競猜</b>
-            <p>猜猜看三天演唱會中 ARMY TIME 可能會演唱的兩首歌曲，投入摸彩箱中。活動結束後，會從每天的參與者中抽出四位幸運兒，獲得 8 吋桌面相框一組。</p>
+          <div class="detail-or">－ 或 －</div>
+
+          <div class="detail-subitem alt">
+            <div class="si-icon">🎤</div>
+            <div class="si-body">
+              <b>ARMY TIME 歌曲競猜</b>
+              <p>猜猜看三天演唱會中 ARMY TIME 可能會演唱的兩首歌曲，投入摸彩箱中。活動結束後，會從每天的參與者中抽出四位幸運兒，獲得 8 吋桌面相框一組。</p>
+            </div>
           </div>
 
           <p>完成四個關卡、集滿印章後，記得到櫃台兌換限定「PP夾」小禮物。</p>
