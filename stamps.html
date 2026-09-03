@@ -315,6 +315,33 @@
     50%{ transform:scale(1.035); }
   }
 
+  /* ===== PP夾款式預覽 ===== */
+  .prize-preview{
+    display:flex;
+    gap:14px;
+    margin-top:14px;
+  }
+  .pp-item{
+    text-align:center;
+  }
+  .pp-item img{
+    width:76px;
+    height:76px;
+    object-fit:contain;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:6px;
+    box-shadow:var(--shadow);
+    display:block;
+  }
+  .pp-item span{
+    display:block;
+    margin-top:6px;
+    font-size:11px;
+    color:var(--blue-mid);
+  }
+
   /* ===== 今日提示（後台可更新文字） ===== */
   .stamp-hint{
     display:none !important;
@@ -400,6 +427,16 @@
           集滿四枚印章後，即可向工作人員兌換限定小禮物。
         </p>
         <div class="prize">🎁 集滿 4 枚兌換「PP夾」（兩款隨機發放，數量有限送完為止）</div>
+        <div class="prize-preview">
+          <div class="pp-item">
+            <img src="images/pp-clip-1.png" alt="PP夾款式一">
+            <span>款式一</span>
+          </div>
+          <div class="pp-item">
+            <img src="images/pp-clip-2.png" alt="PP夾款式二">
+            <span>款式二</span>
+          </div>
+        </div>
         <p class="desc" style="margin-top:14px; font-size:12.5px; opacity:.75;">✦ 點擊印章即可翻面查看關卡內容</p>
       </div>
       <div class="stamp-circles" id="stampCircles">
