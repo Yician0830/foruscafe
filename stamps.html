@@ -233,6 +233,26 @@
     padding:5px 10px;
     border-radius:999px;
   }
+  .detail-subitem{
+    background:#f4f7ff;
+    border-radius:12px;
+    padding:12px 14px;
+    margin:0 0 10px;
+  }
+  .detail-subitem b{
+    display:block;
+    font-family:'Zen Maru Gothic','Noto Sans TC', sans-serif;
+    font-size:13px;
+    color:#33415c;
+    margin-bottom:4px;
+  }
+  .detail-subitem p{
+    margin:0;
+    font-family:'Noto Sans TC', sans-serif;
+    font-size:12.5px;
+    line-height:1.7;
+    color:#556082;
+  }
 
   /* ===== 「我已蓋章」自我勾選按鈕 ===== */
   .stamp-collect-btn{
@@ -466,7 +486,19 @@
         <div class="detail-badge">D</div>
         <div class="detail-body">
           <h3>關卡四・特別小活動</h3>
-          <p>現場備有幾項特別小活動，只要任選其中一項完成，就能找工作人員兌換最後一枚獎章。完成四個關卡、集滿印章後，記得到櫃台兌換限定「PP夾」小禮物。</p>
+          <p>現場備有幾項特別小活動，只要任選其中一項完成，就能找工作人員兌換最後一枚獎章：</p>
+
+          <div class="detail-subitem">
+            <b>🎧 TE TE說情話</b>
+            <p>咖啡廳中放有 5 台錄音機，分別錄製了泰亨於不同直播／節目上說過的中文情話。請根據錄音機上的編號，找出相對應的句子，全部配對正確就可以找工作人員蓋上專屬印章。</p>
+          </div>
+
+          <div class="detail-subitem">
+            <b>🎤 ARMY TIME 歌曲競猜</b>
+            <p>猜猜看三天演唱會中 ARMY TIME 可能會演唱的兩首歌曲，投入摸彩箱中。活動結束後，會從每天的參與者中抽出四位幸運兒，獲得 8 吋桌面相框一組。</p>
+          </div>
+
+          <p>完成四個關卡、集滿印章後，記得到櫃台兌換限定「PP夾」小禮物。</p>
           <span class="detail-tip">🎯 任選一項即可</span>
         </div>
       </div>
@@ -532,16 +564,6 @@
   document.querySelectorAll('.stamp-card').forEach(function(card){
     card.addEventListener('click', function(){
       card.classList.toggle('is-flipped');
-      // 翻到正面看任務內容時，順便捲動到下方對應的關卡詳細介紹
-      if(card.classList.contains('is-flipped')){
-        var letter = card.getAttribute('data-letter');
-        var detail = document.querySelector('.detail-card[data-letter="' + letter + '"]');
-        if(detail){
-          setTimeout(function(){
-            detail.scrollIntoView({ behavior:'smooth', block:'center' });
-          }, 350);
-        }
-      }
     });
   });
 
