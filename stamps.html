@@ -355,9 +355,30 @@
     background:#fff4e8;
     border:1px solid #f0c98f;
     border-radius:8px;
-    padding:6px 10px;
+    padding:8px 10px;
   }
   .detail-hint b{ color:#7a3f0a; }
+  .hint-label{ font-weight:700; margin-bottom:8px; }
+  .hint-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:6px;
+  }
+  .hint-chip{
+    background:#fff;
+    border:1px solid #f0c98f;
+    border-radius:6px;
+    padding:6px 7px;
+    font-size:10.5px;
+    line-height:1.5;
+    color:#8a5a1f;
+  }
+  @media (max-width:900px){
+    .hint-grid{ grid-template-columns:repeat(3, 1fr); }
+  }
+  @media (max-width:480px){
+    .hint-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
 </style>
 </head>
 <body>
@@ -531,7 +552,11 @@
           <h3>關卡三・尋找小胖彈</h3>
           <p>咖啡廳裡悄悄藏了 7 隻出道造型的小胖彈，散落在店內各個角落，而且每天躲藏的位置都不太一樣。仔細找找看，把全部 7 隻都找出來後，就能向工作人員兌換第三枚印章。</p>
           <span class="detail-tip">🔍 位置每日更換</span>
-          <span class="detail-hint" id="stampHintDetail" style="display:none;">💡 <b>今日提示</b>：<span id="stampHintDetailText"></span></span>
+          <div class="detail-hint" id="stampHintDetail" style="display:none;">
+            <div class="hint-label">💡 今日提示</div>
+            <div class="hint-grid" id="stampHintGrid"></div>
+            <span id="stampHintDetailText" style="display:none;"></span>
+          </div>
         </div>
       </div>
 
@@ -627,6 +652,28 @@
       card.classList.toggle('is-flipped');
     });
   });
+
+  // 今日提示：把用「、」分隔的一長串文字拆開，排成 6 欄小方格
+  (function(){
+    var textEl = document.getElementById('stampHintDetailText');
+    var gridEl = document.getElementById('stampHintGrid');
+    if(!textEl || !gridEl) return;
+
+    function renderHintGrid(){
+      var raw = textEl.textContent || '';
+      var parts = raw.split(/[、，,]/).map(function(s){ return s.trim(); }).filter(Boolean);
+      gridEl.innerHTML = '';
+      parts.forEach(function(part){
+        var chip = document.createElement('div');
+        chip.className = 'hint-chip';
+        chip.textContent = part;
+        gridEl.appendChild(chip);
+      });
+    }
+
+    renderHintGrid();
+    new MutationObserver(renderHintGrid).observe(textEl, { childList:true, characterData:true, subtree:true });
+  })();
 
   refreshCollectedUI();
 </script>
